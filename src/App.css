@@ -1620,3 +1620,65 @@ a:hover > .arrow {
   .signal-strip { justify-content:flex-start; padding-inline:22px; gap:19px; min-height:54px; font-size:8px; }
   .signal-strip span:nth-of-type(n+4), .signal-strip i:nth-of-type(n+3) { display:none; }
 }
+
+/* A brighter identity system: brand true color, luminous system diagrams, and editorial motion. */
+.tech-logo { display:inline-block; flex:0 0 17px; width:17px; height:17px; background-color:var(--brand-color,#111); -webkit-mask:var(--brand-icon) center / contain no-repeat; mask:var(--brand-icon) center / contain no-repeat; transition:transform .25s cubic-bezier(.2,.8,.2,1); }
+.skill-items button:hover .tech-logo { transform:rotate(-9deg) scale(1.18); }
+.skill-items button { min-height:32px; padding:5px 8px 5px 4px; border-radius:3px; transition:color .2s,background .2s,border-color .2s,transform .2s; }
+.skill-items button:hover { transform:translateY(-2px); border-color:#dedede; box-shadow:0 5px 14px #1110000c; }
+.social-logo { color:#0a66c2; }
+.social-links a:first-child .brand-glyph { background:#181717; }
+.brand-glyph { width:16px; height:16px; flex:0 0 16px; display:inline-grid; place-items:center; }
+.github-glyph { background:#181717; -webkit-mask:url('/icons/brands/github.svg') center / contain no-repeat; mask:url('/icons/brands/github.svg') center / contain no-repeat; }
+.linkedin-glyph { border-radius:2px; color:#fff; background:#0a66c2; font:700 11px/1 Arial,sans-serif; letter-spacing:-.8px; }
+.project-repo-link { display:inline-flex; align-items:center; gap:7px; margin-top:12px; font:9px var(--mono); letter-spacing:.04em; text-decoration:none; color:#747474; transition:color .2s,transform .2s; }
+.project-repo-link:hover { color:#111; transform:translateX(3px); }
+.project-index b { color:#7451da; font-size:8px; font-weight:500; }
+.project-image img { transition:transform .8s cubic-bezier(.2,.8,.2,1),filter .5s; }
+.project-row:hover .project-image img { transform:scale(1.035); filter:saturate(1.12); }
+.project-row:nth-child(4) .project-image,.project-row:nth-child(5) .project-image { background:#171624; }
+.systems-lab { padding-top:122px; padding-bottom:120px; position:relative; }
+.lab-heading { display:flex; align-items:center; gap:28px; margin-bottom:38px; }
+.lab-heading h2 { margin:0; font-size:clamp(44px,7vw,82px); line-height:.98; letter-spacing:-.075em; font-weight:500; }
+.lab-heading h2 em { font-family:var(--serif); color:#7253d6; font-weight:500; }
+.lab-heading .eyebrow { margin-bottom:14px; }
+.lab-heading p { color:#707070; margin:14px 0 0; font-size:13px; }
+.lab-orbit { width:76px; height:76px; border:1px solid #d9d3ef; border-radius:50%; display:grid; place-items:center; position:relative; flex:none; animation:orbit-spin 18s linear infinite; }
+.lab-orbit:before,.lab-orbit:after { content:""; position:absolute; border:1px solid #e4def7; border-radius:50%; inset:11px -5px; transform:rotate(55deg); }
+.lab-orbit:after { inset:-4px 16px; transform:rotate(-46deg); }
+.lab-orbit i { width:7px;height:7px;border-radius:50%;position:absolute;background:#815be7;box-shadow:0 0 14px #815be788; }
+.lab-orbit i:nth-child(1){transform:translate(0,-35px);background:#21b8d4}.lab-orbit i:nth-child(2){transform:translate(31px,14px);background:#f38b62}.lab-orbit i:nth-child(3){transform:translate(-29px,17px);background:#9570f5}
+.lab-tabs { display:flex; gap:7px; margin-bottom:13px; flex-wrap:wrap; }
+.lab-tabs button { border:1px solid #e4e2eb; color:#777; background:#fff; padding:11px 15px; cursor:pointer; font-size:11px; transition:all .25s; }
+.lab-tabs button span { font:9px var(--mono); color:#aaa; margin-right:12px; }
+.lab-tabs button[aria-pressed="true"] { color:#fff; background:#171624; border-color:#171624; box-shadow:0 7px 20px #17162420; }
+.lab-tabs button[aria-pressed="true"] span { color:#cfbfff; }
+.lab-display { min-height:310px; display:grid; grid-template-columns:1.5fr .8fr; overflow:hidden; background:radial-gradient(ellipse at 26% 44%,#27223b 0,#171624 58%,#101018 100%); color:#fff; position:relative; animation:lab-appear .45s ease both; }
+.lab-display:before { content:""; position:absolute; inset:0; opacity:.16; background-image:linear-gradient(#fff1 1px,transparent 1px),linear-gradient(90deg,#fff1 1px,transparent 1px); background-size:28px 28px; mask-image:linear-gradient(90deg,#000,transparent 95%); pointer-events:none; }
+.lab-pipeline { display:flex; align-items:center; justify-content:space-around; gap:8px; padding:45px 26px; position:relative; }
+.lab-signal-line { height:1px; position:absolute; left:10%;right:9%;top:50%; background:linear-gradient(90deg,#56d6ed,#a988ff,#fa9cce); opacity:.65; }
+.lab-signal-line:after { content:""; position:absolute; width:7px;height:7px;top:-3px;left:0;border-radius:50%;background:#fff;box-shadow:0 0 13px 4px #92e8ff;animation:signal-run 4.5s ease-in-out infinite; }
+.lab-node { z-index:1; position:relative; display:flex; flex-direction:column; justify-content:center; align-items:center; width:clamp(74px,11vw,116px); min-height:100px; padding:9px 5px; background:#201e30; border:1px solid #ffffff2b; box-shadow:0 10px 30px #09080e80; transform:translateY(calc((var(--node-index) % 2)*-9px)); animation:node-rise .45s calc(var(--node-index)*90ms) both; }
+.node-signal { width:8px;height:8px; border-radius:50%;background:#8de9ec; box-shadow:0 0 13px #8de9ec; margin-bottom:12px; animation:node-beat 2.1s calc(var(--node-index)*180ms) infinite; }
+.lab-node small,.lab-node i { font:8px var(--mono); color:#9d95bd; letter-spacing:.1em; font-style:normal; }
+.lab-node strong { margin:5px 0 7px; font:600 clamp(8px,1vw,11px) var(--mono); text-align:center; color:#fff; }
+.lab-readout { z-index:1; padding:43px 32px; border-left:1px solid #fff2; display:flex; flex-direction:column; justify-content:center; }
+.lab-readout>span:first-child { font:9px var(--mono); letter-spacing:.11em; color:#b9a2ff; }
+.lab-readout h3 { font-size:clamp(20px,2.6vw,30px); font-weight:500; line-height:1.2; letter-spacing:-.045em; margin:18px 0 11px; }
+.lab-readout p { font-size:11px; line-height:1.7; color:#b4b1c0; margin:0; }
+.lab-live { margin-top:25px; font:8px var(--mono); letter-spacing:.07em; color:#aaa5bd; display:flex; align-items:center; gap:7px; }
+.lab-live i { width:6px;height:6px;border-radius:50%;background:#89e3c4;box-shadow:0 0 9px #89e3c4; }
+.future-path { position:relative; margin-top:45px; padding:23px 65px 23px 25px; border:1px solid #ded8f3; background:linear-gradient(105deg,#faf9ff,#fff 76%); overflow:hidden; }
+.future-path:before { content:""; position:absolute; inset:0 auto 0 0; width:3px; background:linear-gradient(#19bbd1,#8d6be8,#ff947e); }
+.future-path span { display:block; font:9px var(--mono); letter-spacing:.12em; color:#7658c7; margin-bottom:10px; }
+.future-path strong { font-size:20px; letter-spacing:-.04em; font-weight:500; }
+.future-path p { color:#747474; font-size:11px; margin:9px 0 0; }
+.future-path>i { position:absolute; right:24px;top:50%;transform:translateY(-50%);font-style:normal;font-size:25px;color:#8f75df; }
+@keyframes orbit-spin { to { transform:rotate(360deg) } }
+@keyframes signal-run { 0%{left:0;opacity:0}12%{opacity:1}88%{opacity:1}100%{left:100%;opacity:0} }
+@keyframes node-beat { 0%,100%{transform:scale(.82);opacity:.7}50%{transform:scale(1.18);opacity:1} }
+@keyframes node-rise { from{opacity:0;transform:translateY(12px)}to{opacity:1} }
+@keyframes lab-appear { from{opacity:.65;transform:translateY(5px)}to{opacity:1;transform:none} }
+@media(max-width:850px){.lab-display{grid-template-columns:1fr}.lab-pipeline{min-height:210px}.lab-readout{border-left:0;border-top:1px solid #fff2;padding:25px 28px}.systems-lab{padding-block:85px}}
+@media(max-width:560px){.lab-heading{gap:16px}.lab-orbit{width:52px;height:52px}.lab-orbit i:nth-child(1){transform:translate(0,-24px)}.lab-orbit i:nth-child(2){transform:translate(21px,10px)}.lab-orbit i:nth-child(3){transform:translate(-20px,12px)}.lab-pipeline{overflow-x:auto;justify-content:flex-start;padding:35px 18px;min-height:175px}.lab-node{flex:0 0 78px}.lab-signal-line{left:42px;right:auto;width:calc(100% - 84px)}.lab-readout{padding:22px}.future-path{padding:19px 45px 19px 18px}.future-path strong{font-size:16px}}
+@media(prefers-reduced-motion:reduce){.lab-orbit,.lab-signal-line:after,.node-signal,.lab-node,.lab-display{animation:none!important}}

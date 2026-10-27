@@ -53,7 +53,7 @@ describe("portfolio navigation and project explorer", () => {
     ).not.toBeNull();
     expect(
       screen.getByText(
-        "Project specific technologies were not listed in the supplied CV.",
+        "Stack details aren’t part of this portfolio entry yet.",
       ),
     ).not.toBeNull();
   });
@@ -63,9 +63,17 @@ describe("portfolio navigation and project explorer", () => {
     fireEvent.click(screen.getByRole("button", { name: "React" }));
     await waitFor(() =>
       expect(
-        screen.getByText(/does not connect it to a named project yet/),
+        screen.getByText(/No showcased project is tagged with React yet/),
       ).not.toBeNull(),
     );
+  });
+
+  it("filters the concept studies by their engineering focus", async () => {
+    render(<App />);
+    fireEvent.click(screen.getByRole("button", { name: /Explore project index/ }));
+    fireEvent.click(await screen.findByRole("button", { name: "AI / LLM" }));
+    expect(screen.getAllByRole("button", { name: /Neural Atlas/ })).toHaveLength(2);
+    expect(screen.queryByRole("button", { name: /Field Echo/ })).toBeNull();
   });
 
   it("provides a working résumé download link and command palette shortcut", async () => {

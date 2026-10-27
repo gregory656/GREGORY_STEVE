@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import {
   education,
   experience,
+  futureDirection,
   profile,
   projects,
   skillGroups,
@@ -18,6 +19,7 @@ import {
 import "./App.css";
 
 const CURRENT_YEAR = new Date().getFullYear();
+const PROJECT_FILTERS = ["All", "Campus", "Education", "Business", "AI / LLM", "Systems / IoT"];
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return diagonal ? (
@@ -41,7 +43,7 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 }
 const brandSlugs: Record<string, string> = {
   JavaScript: "javascript", TypeScript: "typescript", Python: "python", PHP: "php",
-  SQL: "postgresql", Java: "openjdk", "C++": "cplusplus",
+  Java: "openjdk", "C++": "cplusplus",
   C: "c", Dart: "dart", Kotlin: "kotlin", React: "react", "Next.js": "nextdotjs",
   HTML: "html5", CSS: "css", "Tailwind CSS": "tailwindcss", Bootstrap: "bootstrap",
   "Node.js": "nodedotjs", "Express.js": "express", Django: "django", Flask: "flask",
@@ -52,9 +54,15 @@ const brandSlugs: Record<string, string> = {
   Vitest: "vitest", Pytest: "pytest", Jest: "jest", pandas: "pandas",
   NumPy: "numpy", "scikit-learn": "scikitlearn", PyTorch: "pytorch", TensorFlow: "tensorflow",
 };
+const brandColors: Record<string, string> = {
+  JavaScript: "#d6a900", TypeScript: "#3178c6", Python: "#3776ab", PHP: "#777bb4", SQL: "#4169e1", Java: "#e76f00", "C++": "#00599c", C: "#555", Dart: "#0175c2", Kotlin: "#7f52ff", React: "#087ea4", "Next.js": "#111", HTML: "#e34f26", CSS: "#1572b6", "Tailwind CSS": "#06b6d4", Bootstrap: "#7952b3", "Node.js": "#5fa04e", "Express.js": "#333", Django: "#092e20", Flask: "#222", FastAPI: "#009688", Laravel: "#ff2d20", "Spring Boot": "#6db33f", PostgreSQL: "#4169e1", MySQL: "#00758f", SQLite: "#003b57", MongoDB: "#47a248", Firebase: "#dd2c00", Redis: "#d82c20", Docker: "#2496ed", Linux: "#e5a900", Git: "#f05032", GitHub: "#222", "GitHub Actions": "#2088ff", Vitest: "#729b1b", Pytest: "#3776ab", Jest: "#c21325", pandas: "#150458", NumPy: "#4dabcf", "scikit-learn": "#f7931e", PyTorch: "#ee4c2c", TensorFlow: "#ff6f00",
+};
 function TechMark({ name }: { name: string }) {
   const slug = brandSlugs[name];
-  return slug ? <img className="tech-logo" src={`/icons/brands/${slug}.svg`} alt="" aria-hidden="true" loading="lazy" /> : null;
+  return slug ? <span className="tech-logo" style={{ "--brand-color": brandColors[name] ?? "#111", "--brand-icon": `url(/icons/brands/${slug}.svg)` } as React.CSSProperties} aria-hidden="true" /> : null;
+}
+function BrandGlyph({ name }: { name: "GitHub" | "LinkedIn" }) {
+  return name === "GitHub" ? <span className="brand-glyph github-glyph" aria-hidden="true" /> : <span className="brand-glyph linkedin-glyph" aria-hidden="true">in</span>;
 }
 function BrandMark({ compact = false }: { compact?: boolean }) {
   return (
@@ -319,7 +327,7 @@ function ProjectRow({
         </span>
       </button>
       <div className="project-copy">
-        <span className="project-index">{project.number} / 03</span>
+        <span className="project-index">{project.number} / 05{project.concept && <b> · CONCEPT</b>}</span>
         <div>
           <p className="project-category">{project.category}</p>
           <h3>
@@ -333,9 +341,7 @@ function ProjectRow({
             {project.technologies.length ? (
               project.technologies.map((t) => <span key={t}>{t}</span>)
             ) : (
-              <span className="project-tech-note">
-                Project stack not listed in CV
-              </span>
+              <span className="project-tech-note">Product thinking · systems · people</span>
             )}
           </div>
           <button
@@ -344,6 +350,7 @@ function ProjectRow({
           >
             Read the case study <Arrow diagonal />
           </button>
+          <a className="project-repo-link" href={project.github} target="_blank" rel="noreferrer"><BrandGlyph name="GitHub" /> GitHub profile <Arrow diagonal /></a>
         </div>
       </div>
     </article>
@@ -365,7 +372,7 @@ thoughtfully made."
         ))}
       </div>
       <div className="all-projects">
-        <span>Three projects · product, systems, and the web</span>
+        <span>Five explorations · products, intelligence, and connected systems</span>
         <button className="text-link" onClick={() => go("/projects")}>
           Explore project index <Arrow diagonal />
         </button>
@@ -381,7 +388,7 @@ function Toolkit({ onSkill }: { onSkill: (skill: string) => void }) {
         label="Technical toolkit"
         title="A practical range.
 A product mindset."
-        intro="Tools are selected for the problems at hand. Choose a technology to find related project work."
+        intro="A growing engineering map: tools, system concepts, and interview foundations. Select a tool to explore related project work."
       />
       <div className="skill-grid">
         {skillGroups.map((group, i) => (
@@ -407,9 +414,30 @@ A product mindset."
         ))}
       </div>
       <p className="toolkit-note">
-        A broad working toolkit from my CV; specific project connections are
-        shown only where documented.
+        A learning map, not a claim that every tool appears in shipped work. Project pages distinguish live work from architecture concepts.
       </p>
+    </section>
+  );
+}
+const labModes = [
+  { name: "LLM / RAG", signal: "A grounded answer, with the evidence still attached.", nodes: ["QUESTION", "RETRIEVE", "RERANK", "GENERATE", "VERIFY"] },
+  { name: "Edge / IoT", signal: "Sensors keep their memory when the network disappears.", nodes: ["SENSOR", "EDGE BUFFER", "MQTT", "INGEST", "INSIGHT"] },
+  { name: "Distributed", signal: "Assume a component will fail. Design the recovery path first.", nodes: ["CLIENT", "GATEWAY", "QUEUE", "WORKER", "STORE"] },
+];
+function SystemsLab() {
+  const [mode, setMode] = useState(0);
+  const active = labModes[mode];
+  return (
+    <section className="systems-lab section-wrap" id="lab">
+      <div className="lab-heading"><span className="lab-orbit" aria-hidden="true"><i /><i /><i /></span><div><Eyebrow>Interactive systems desk · 06</Eyebrow><h2>Think in <em>systems.</em></h2><p>Three problems. Three ways to make complexity visible.</p></div></div>
+      <div className="lab-tabs" role="group" aria-label="Choose a system diagram">{labModes.map((item, i) => <button key={item.name} aria-pressed={mode === i} onClick={() => setMode(i)}><span>0{i + 1}</span>{item.name}</button>)}</div>
+      <div className="lab-display" key={active.name}>
+        <div className="lab-pipeline" aria-label={active.nodes.join(" to ")}>
+          {active.nodes.map((node, i) => <div className="lab-node" key={node} style={{ "--node-index": i } as React.CSSProperties}><span className="node-signal" /><small>0{i + 1}</small><strong>{node}</strong><i>{i === active.nodes.length - 1 ? "OUTPUT" : "PROCESS"}</i></div>)}
+          <div className="lab-signal-line" aria-hidden="true" />
+        </div>
+        <div className="lab-readout"><span>DESIGN PRINCIPLE / {active.name}</span><h3>{active.signal}</h3><p>Explore the diagram as a systems-thinking exercise. It describes a design direction, not a claim of production deployment.</p><span className="lab-live"><i /> MODEL: CONCEPTUAL · STATUS: EXPLORING</span></div>
+      </div>
     </section>
   );
 }
@@ -440,12 +468,7 @@ people in mind."
           engineering. My work spans campus communities, school workflows, and
           customer facing web experiences.
         </p>
-        <p>
-          I value clear interfaces, maintainable systems, and the patient work
-          of understanding a problem before reaching for a tool. I use AI as a
-          research and implementation aid, then review, test, and adapt what it
-          produces.
-        </p>
+        <p>I’m fascinated by intelligent products: how models retrieve evidence, how distributed systems recover, and how tiny devices make reliable decisions at the edge. I bring curiosity, critical thinking, and a habit of asking what happens when the happy path ends.</p>
         <button className="text-link" onClick={() => go("/projects")}>
           See how I work <Arrow diagonal />
         </button>
@@ -472,7 +495,7 @@ function Journey() {
                 <h3>{e.degree}</h3>
                 <p>{e.institution}</p>
               </div>
-              <span className="journey-date">Dates not listed</span>
+              <span className="journey-date">Timeline open</span>
             </article>
           ))}
         </div>
@@ -491,6 +514,7 @@ function Journey() {
           ))}
         </div>
       </div>
+      <div className="future-path"><span>FUTURE DIRECTION / LEARNING PATH</span><strong>{futureDirection}</strong><p>Long-term curiosity: intelligent devices, robust edge systems, and the software that connects them.</p><i aria-hidden="true">↗</i></div>
     </section>
   );
 }
@@ -508,8 +532,7 @@ function Credentials() {
         <div>
           <h3>Certificates</h3>
           <p>
-            No certificates were included with the supplied CV. This section is
-            ready for verified credentials when available.
+            Credentials will be added as they’re earned. For now, the focus is on learning in public and building thoughtful systems.
           </p>
         </div>
       </div>
@@ -571,7 +594,7 @@ function ResumeContact() {
           </button>
           <div className="social-links">
             <a href={profile.github} target="_blank" rel="noreferrer">
-            <img className="social-logo" src="/icons/brands/github.svg" alt="" aria-hidden="true" /> GitHub <Arrow diagonal />
+            <BrandGlyph name="GitHub" /> GitHub <Arrow diagonal />
             </a>
             <a href={profile.linkedin} target="_blank" rel="noreferrer">
             <svg className="social-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-11.8 7H5v9h2.2zm-.1-3.2a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6M19 13.5c0-2.5-1.3-3.7-3.1-3.7a2.7 2.7 0 0 0-2.4 1.3V10H11.3v9h2.2v-4.5c0-1.2.2-2.4 1.7-2.4s1.5 1.4 1.5 2.5V19H19z" /></svg> LinkedIn <Arrow diagonal />
@@ -630,6 +653,7 @@ function Home({
           <span>SOFTWARE ENGINEERING</span>
         </div>
         <Work go={go} />
+        <SystemsLab />
         <Toolkit onSkill={onSkill} />
         <About go={go} />
         <Journey />
@@ -649,7 +673,6 @@ function ProjectIndex({
 }) {
   const [query, setQuery] = useState("");
   const [filter, setFilter] = useState(selectedSkill || "All");
-  const filters = ["All", "Campus", "Education", "Business"];
   const filtered = useMemo(
     () =>
       projects.filter((p) => {
@@ -657,8 +680,7 @@ function ProjectIndex({
           p.title +
           " " +
           p.summary +
-          " " +
-          p.category
+          " " + p.category + " " + p.technologies.join(" ")
         ).toLowerCase();
         const matchText = text.includes(query.toLowerCase());
         const matchCategory =
@@ -668,10 +690,13 @@ function ProjectIndex({
           (filter === "Education" &&
             p.category.toLowerCase().includes("school")) ||
           (filter === "Business" &&
-            p.category.toLowerCase().includes("business"));
+            p.category.toLowerCase().includes("business")) ||
+          (filter === "AI / LLM" && p.category.toLowerCase().includes("ai / llm")) ||
+          (filter === "Systems / IoT" && p.category.toLowerCase().includes("systems / iot")) ||
+          (!PROJECT_FILTERS.includes(filter) && p.technologies.some((technology) => technology.toLowerCase() === filter.toLowerCase()));
         return matchText && matchCategory;
       }),
-    [query, filter],
+        [query, filter],
   );
   return (
     <main id="main" className="index-page section-wrap">
@@ -697,7 +722,7 @@ function ProjectIndex({
           <kbd>/</kbd>
         </label>
         <div className="filters" role="group" aria-label="Project categories">
-          {filters.map((f) => (
+          {PROJECT_FILTERS.map((f) => (
             <button
               key={f}
               className={filter === f ? "active" : ""}
@@ -721,8 +746,8 @@ function ProjectIndex({
       {filtered.length === 0 && (
         <div className="empty-state">
           <p>
-            {filter !== "All" && !filters.includes(filter)
-              ? "The CV lists this skill in the overall toolkit, but does not connect it to a named project yet."
+            {filter !== "All" && !PROJECT_FILTERS.includes(filter)
+              ? `No showcased project is tagged with ${filter} yet. Explore the concept studies for proposed system designs.`
               : "No projects match that search."}
           </p>
           <button
@@ -737,8 +762,7 @@ function ProjectIndex({
         </div>
       )}
       <p className="artwork-note">
-        Project cover images are original editorial illustrations, not product
-        screenshots.
+        Concept imagery is original editorial artwork, not a screenshot of a live product.
       </p>
     </main>
   );
@@ -757,7 +781,7 @@ function CaseStudy({
       </button>
       <div className="case-header">
         <Eyebrow>
-          {project.number} / Case study · {project.category}
+          {project.number} / {project.concept ? "Concept study" : "Case study"} · {project.category}
         </Eyebrow>
         <h1>{project.title}</h1>
         <p>{project.description}</p>
@@ -771,9 +795,9 @@ function CaseStudy({
             {project.category}
           </span>
           <span>
-            <small>LINK</small>
+            <small>{project.concept ? "CONCEPT CODE" : "LIVE PROJECT"}</small>
             <a href={project.url} target="_blank" rel="noreferrer">
-              Visit project <Arrow diagonal />
+              {project.concept ? <><BrandGlyph name="GitHub" /> GitHub profile</> : <>Visit project <Arrow diagonal /></>}
             </a>
           </span>
         </div>
@@ -786,19 +810,19 @@ function CaseStudy({
         <aside>
           <Eyebrow>On this page</Eyebrow>
           <a href="#problem">Project scope</a>
-          <a href="#approach">CV contributions</a>
+          <a href="#approach">Approach</a>
           <a href="#decisions">Technical record</a>
           <a href="#reflection">Reflection</a>
         </aside>
         <div className="case-article">
           <section id="problem">
             <Eyebrow>01 / Project scope</Eyebrow>
-            <h2>What the CV describes</h2>
+            <h2>The challenge</h2>
             <p>{project.problem}</p>
           </section>
           <section id="approach">
             <Eyebrow>02 / Contribution</Eyebrow>
-            <h2>Work listed in the CV</h2>
+            <h2>Approach</h2>
             <ul>
               {project.approach.map((s) => (
                 <li key={s}>{s}</li>
@@ -819,8 +843,7 @@ function CaseStudy({
                 project.technologies.map((t) => <span key={t}>{t}</span>)
               ) : (
                 <p>
-                  Project specific technologies were not listed in the supplied
-                  CV.
+                  Stack details aren’t part of this portfolio entry yet.
                 </p>
               )}
             </div>

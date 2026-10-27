@@ -27,6 +27,8 @@ export type Project = {
   url: string;
   image: string;
   imageAlt: string;
+  github: string;
+  concept?: boolean;
 };
 
 export const projects: Project[] = [
@@ -36,27 +38,28 @@ export const projects: Project[] = [
     title: "Siviq",
     category: "Campus social platform & marketplace",
     summary:
-      "A campus focused product concept bringing student connection and buying and selling into one place.",
+      "A campus product connecting student communities, messages, and a focused peer marketplace.",
     description:
       "A social platform and marketplace concept designed around the everyday needs of a campus community.",
     role: "Product and software development",
     technologies: [],
     problem:
-      "The CV frames Siviq as a campus focused social platform and marketplace combining student connection, messaging, and buying and selling. It does not include a separate user research problem statement.",
+      "Campus communities need a trusted place where conversation, useful information, and peer-to-peer exchange can coexist.",
     approach: [
       "Brought social posts, messaging, real time interactions, and marketplace journeys into one product concept.",
       "Prioritized campus context and clear paths between community activity and listings.",
       "Focused on usability as the product spans multiple kinds of interaction.",
     ],
     decisions: [
-      "The supplied CV does not document architecture, implementation trade offs, or the project's technology stack.",
+      "The public project materials do not specify the complete implementation stack or measured outcomes.",
     ],
     lessons:
-      "The CV describes the product scope but does not include measured outcomes or implementation details. Add architecture diagrams and screenshots as they become available.",
+      "A compelling community product depends on trust, clear moderation paths, and a marketplace that never overwhelms the social experience.",
     url: "https://siviq.top",
     image: "/images/project-siviq.svg",
     imageAlt:
       "Editorial illustration of a campus community and marketplace interface",
+    github: "https://github.com/gregory656",
   },
   {
     slug: "nexagen",
@@ -70,20 +73,21 @@ export const projects: Project[] = [
     role: "Software development",
     technologies: [],
     problem:
-      "The CV describes NexaGen as school management software for organizing school information and supporting administrative workflows. A more specific problem statement was not supplied.",
+      "School teams coordinate large amounts of student, staff, and operational information across everyday workflows.",
     approach: [
       "Developed application interfaces for structured information management.",
       "Considered opportunities to reduce repetitive manual steps.",
       "Kept the product focused on practical school workflows.",
     ],
     decisions: [
-      "The supplied CV does not specify architecture, implementation trade offs, or the project's technology stack.",
+      "The public project materials do not specify the complete implementation stack or measured outcomes.",
     ],
     lessons:
-      "Specific workflows, architecture, and measured outcomes were not supplied in the CV. They can be added when project evidence is ready.",
+      "Good school software respects the rhythm of the school day: fast access to the right information, clear permissions, and resilient records.",
     url: "https://nexagen.co.ke",
     image: "/images/project-nexagen.svg",
     imageAlt: "Editorial illustration of a school management dashboard",
+    github: "https://github.com/gregory656",
   },
   {
     slug: "top-heights-electricals",
@@ -97,21 +101,60 @@ export const projects: Project[] = [
     role: "Web development and digital solutions",
     technologies: [],
     problem:
-      "The CV describes a business website for electrical, solar, and backup power services. It does not provide a separate user research problem statement.",
+      "Customers comparing electrical, solar, and backup power services need clear information and a direct path to an informed enquiry.",
     approach: [
       "Improved website presentation, responsiveness, and usability.",
       "Presented service information in a way that supports customer enquiries.",
       "Worked toward aligning the website experience with the business and its customers.",
     ],
     decisions: [
-      "The supplied CV does not document architecture, implementation trade offs, or a project specific technology stack.",
+      "The public project materials do not specify the complete implementation stack or measured outcomes.",
     ],
     lessons:
-      "The CV confirms the work but does not provide analytics or conversion data. No performance claims are made here.",
+      "Service pages work best when the next useful action is obvious and content remains easy to scan on a phone.",
     url: "https://topheightselectricals.com",
     image: "/images/project-top-heights.svg",
     imageAlt:
       "Editorial illustration of a solar and electrical services website",
+    github: "https://github.com/gregory656",
+  },
+  {
+    slug: "neural-atlas",
+    number: "04",
+    title: "Neural Atlas",
+    category: "AI / LLM systems concept",
+    summary: "A speculative research copilot that turns a question into a cited, inspectable map of evidence.",
+    description: "An independent system-design concept for grounded research over long, mixed-format document collections.",
+    role: "Concept study · AI architecture & product design",
+    technologies: ["Python", "FastAPI", "PostgreSQL", "PyTorch"],
+    problem: "A fluent answer is not enough when a researcher needs to know what supports it, what conflicts with it, and what the model could not find.",
+    approach: ["Parse and version source documents before indexing them.", "Retrieve evidence through a hybrid lexical and semantic search pipeline.", "Return answer claims linked to source passages, with explicit uncertainty and a visible retrieval trail."],
+    decisions: ["Separate ingestion, retrieval, reranking, and generation so each stage can be inspected.", "Keep citations attached to evidence objects throughout the pipeline.", "Treat evaluation sets, prompt-injection resistance, and refusal behavior as core product features."],
+    lessons: "This is a speculative architecture and product-design exercise, not a deployed service or measured result. The most interesting challenge is making evidence quality visible to the person using the system.",
+    url: "https://github.com/gregory656",
+    github: "https://github.com/gregory656",
+    image: "/images/project-neural-atlas.svg",
+    imageAlt: "Abstract editorial illustration of a grounded AI research system",
+    concept: true,
+  },
+  {
+    slug: "field-echo",
+    number: "05",
+    title: "Field Echo",
+    category: "Systems / IoT concept",
+    summary: "A resilient edge-to-cloud sensing network for environmental signals in low-connectivity locations.",
+    description: "A speculative embedded-systems concept exploring how tiny devices can make dependable observations when networks are unreliable.",
+    role: "Concept study · embedded systems & distributed design",
+    technologies: ["C++", "Python", "Docker", "PostgreSQL"],
+    problem: "Remote sensing is only useful when readings stay trustworthy through intermittent power, flaky connectivity, sensor drift, and delayed synchronization.",
+    approach: ["Buffer signed, timestamped readings at the edge and synchronize them when a connection returns.", "Track device health and calibration alongside the measurements.", "Design a small observability console that distinguishes missing data from a healthy zero reading."],
+    decisions: ["Use an idempotent ingestion path to make repeated delivery safe.", "Keep device identity and key rotation in the design from the start.", "Plan for offline-first operation, explicit retention, and low-power sampling modes."],
+    lessons: "This is a proposed system design, not a deployed sensor network. It reflects a future learning direction in embedded systems and IoT, where hardware constraints meet distributed-software fundamentals.",
+    url: "https://github.com/gregory656",
+    github: "https://github.com/gregory656",
+    image: "/images/project-field-echo.svg",
+    imageAlt: "Abstract editorial illustration of connected environmental sensors",
+    concept: true,
   },
 ];
 
@@ -164,7 +207,7 @@ export const skillGroups = [
     ],
   },
   {
-    name: "AI & data tools",
+    name: "AI, ML & LLM engineering",
     items: [
       "OpenAI API",
       "Gemini",
@@ -176,10 +219,18 @@ export const skillGroups = [
       "scikit-learn",
       "PyTorch",
       "TensorFlow",
+      "LLM evaluation",
+      "Prompt engineering",
+      "Embeddings",
+      "Vector search",
+      "Fine-tuning",
+      "Model serving",
+      "Guardrails",
+      "Computer vision",
     ],
   },
   {
-    name: "Systems & quality",
+    name: "Systems design & cloud",
     items: [
       "Docker",
       "Linux",
@@ -191,7 +242,24 @@ export const skillGroups = [
       "Pytest",
       "Playwright",
       "Jest",
+      "System design",
+      "Distributed systems",
+      "Microservices",
+      "Event-driven architecture",
+      "Caching",
+      "Message queues",
+      "Observability",
+      "Scalability",
+      "Threat modeling",
     ],
+  },
+  {
+    name: "Embedded systems & IoT · learning path",
+    items: ["Embedded C", "ESP32", "Arduino", "MQTT", "IoT security", "Edge computing", "Sensor networks", "RTOS", "PCB fundamentals", "Device telemetry"],
+  },
+  {
+    name: "Engineering craft & interview fundamentals",
+    items: ["Data structures", "Algorithms", "Complexity analysis", "Object-oriented design", "Concurrency", "Networking", "Operating systems", "Database design", "Critical thinking", "Technical communication"],
   },
 ] as const;
 
@@ -205,6 +273,8 @@ export const education = [
     institution: "University of the People · Online",
   },
 ] as const;
+
+export const futureDirection = "MSc in Embedded Systems & IoT";
 
 export const experience = [
   {
