@@ -67,11 +67,8 @@ function BrandGlyph({ name }: { name: "GitHub" | "LinkedIn" }) {
 function BrandMark({ compact = false }: { compact?: boolean }) {
   return (
     <span className={compact ? "brand-mark brand-mark-compact" : "brand-mark"} aria-hidden="true">
-      <svg viewBox="0 0 42 42" fill="none">
-        <path d="M18 8H7v9h11v10H6" stroke="currentColor" strokeWidth="3.2" strokeLinejoin="miter" />
-        <path d="M36 12V8H24v19h12v-9h-7" stroke="currentColor" strokeWidth="3.2" strokeLinejoin="miter" />
-        <circle cx="36" cy="36" r="2" fill="currentColor" />
-      </svg>
+      <img src="/images/steve.jpg" alt="" />
+      <b>SG</b>
     </span>
   );
 }
@@ -220,6 +217,38 @@ function Botanical({ className = "" }: { className?: string }) {
     </svg>
   );
 }
+function EngineeringScene() {
+  return <svg className="engineering-scene" viewBox="0 0 420 420" fill="none" aria-hidden="true">
+    <defs><radialGradient id="human-glow"><stop stopColor="#fff"/><stop offset=".48" stopColor="#d9cbff" stopOpacity=".5"/><stop offset="1" stopColor="#fff" stopOpacity="0"/></radialGradient></defs>
+    <circle className="human-halo" cx="210" cy="205" r="116" fill="url(#human-glow)"/>
+    <circle className="human-orbit orbit-one" cx="210" cy="205" r="147" stroke="#d8cef5" strokeDasharray="3 8"/>
+    <ellipse className="human-orbit orbit-two" cx="210" cy="205" rx="175" ry="90" stroke="#d7eff1" transform="rotate(-34 210 205)"/>
+    <path className="circuit-route route-one" d="M31 92h65l25 25h44m224 194h-73l-29-29h-41M82 340h45l31-31h35m140-238h-43l-25 25h-30" stroke="#b8a5ed"/>
+    <path className="circuit-route route-two" d="M49 222h76l20-20h38m188-84h-58l-25 26h-45m-213 101h54l30 29h44m204-18h-51l-28 29h-37" stroke="#a7dbe2"/>
+    <g className="human-figure"><circle cx="210" cy="164" r="30" fill="#fff" stroke="#22202b" strokeWidth="2"/><path d="M154 282c4-43 26-66 56-66s52 23 56 66" fill="#fff" stroke="#22202b" strokeWidth="2"/><path d="M173 238c13 13 26 19 37 19s24-6 37-19" stroke="#b5a1ed" strokeWidth="3" strokeLinecap="round"/></g>
+    <g className="human-nodes"><circle cx="96" cy="117" r="7" fill="#f3a17f"/><circle cx="344" cy="142" r="6" fill="#8dcad3"/><circle cx="129" cy="309" r="7" fill="#8dcad3"/><circle cx="330" cy="292" r="8" fill="#b99df1"/><circle cx="63" cy="222" r="4" fill="#f3a17f"/></g>
+    <text x="210" y="365" textAnchor="middle" fill="#85808d" fontFamily="monospace" fontSize="9" letterSpacing="3">PEOPLE AT THE CENTER / SYSTEMS AROUND</text>
+  </svg>;
+}
+function FieldTicker({ top = false }: { top?: boolean }) {
+  const notes = top
+    ? ["Open to software engineering roles", "Nairobi · Kenya", "LLM systems · evidence first", "Systems design + critical thinking", "MSc Embedded Systems & IoT · future direction", "Neural Atlas + Field Echo concept studies"]
+    : ["Nairobi · Kenya", "Building useful products", "LLM systems · evidence first", "Critical thinking in practice", "MSc Embedded Systems & IoT · future direction", "Design for the failure path", "Open to software engineering roles"];
+  return <section className={top ? "field-ticker field-ticker-top" : "field-ticker"} aria-label={top ? "Portfolio news highlights" : "Portfolio field notes"}>
+    <div className="ticker-heading"><span><i /> {top ? "PORTFOLIO SIGNAL" : "FIELD NOTES"}</span><span>{top ? "AT A GLANCE" : "PROJECT SIGNAL / 01—07"}</span></div>
+    <div className="ticker-window" aria-hidden="true"><div className="ticker-track">{[0, 1].map((loop) => <div className="ticker-set" key={loop}>{notes.map((note) => <span className="ticker-note" key={note}><b>✳</b>{note}</span>)}</div>)}</div></div>
+    <p className="sr-only">{notes.join(". ")}</p>
+  </section>;
+}
+function BirdFlight() {
+  return <svg className="bird-flight" viewBox="0 0 520 520" fill="none" aria-hidden="true">
+    <path className="flight-path" d="M25 198C145 26 321 72 477 20"/>
+    <g className="bird bird-one"><path d="M0 11Q8 2 16 11Q24 2 32 11"/></g>
+    <g className="bird bird-two"><path d="M0 10Q6 3 12 10Q18 3 24 10"/></g>
+    <g className="bird bird-three"><path d="M0 8Q5 2 10 8Q15 2 20 8"/></g>
+    <circle className="flight-star star-one" cx="405" cy="74" r="2"/><circle className="flight-star star-two" cx="100" cy="76" r="2"/>
+  </svg>;
+}
 function Hero() {
   const [offset, setOffset] = useState({ x: 0, y: 0 });
   const pointer = (e: React.PointerEvent<HTMLDivElement>) => {
@@ -291,6 +320,7 @@ function Hero() {
         <div className="portrait-coordinate" aria-hidden="true">
           <span>01</span><i /> <span>BUILT WITH INTENT</span>
         </div>
+        <BirdFlight />
         <Botanical className="hero-botanical" />
         <span className="hero-side-note">
           BUILD WITH INTENTION / {CURRENT_YEAR}
@@ -445,7 +475,7 @@ function About({ go }: { go: (to: string) => void }) {
   return (
     <section id="about" className="about-section section-wrap">
       <div className="about-art">
-        <Botanical />
+        <EngineeringScene />
         <div className="art-caption">
           A SYSTEM IS ONLY AS GOOD
           <br />
@@ -642,6 +672,7 @@ function Home({
   return (
     <>
       <main id="main">
+        <FieldTicker top />
         <div id="top">
           <Hero />
         </div>
@@ -659,6 +690,7 @@ function Home({
         <Journey />
         <Credentials />
         <ResumeContact />
+        <FieldTicker />
       </main>
       <Footer go={go} />
     </>
@@ -1002,25 +1034,41 @@ export default function App() {
   }, [path]);
   useEffect(() => {
     const targets = document.querySelectorAll<HTMLElement>(
-      ".hero-copy, .hero-visual, .section-title, .project-row, .skill-group, .about-art, .about-copy > p, .journey-row, .credentials-section > *, .resume-section > *, .contact-title, .contact-details",
+      ".hero-copy, .hero-visual, .section-title, .project-row, .skill-group, .about-art, .about-copy > p, .journey-row, .credentials-section > *, .resume-section > *, .contact-title, .contact-details, .systems-lab, .field-ticker, .work-section, .toolkit-section, .about-section, .journey-section, .credentials-section, .contact-section, .signal-strip",
     );
     if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
       targets.forEach((target) => target.classList.add("is-visible"));
       return;
     }
+    let previousY = window.scrollY;
+    let direction: "down" | "up" = "down";
+    const updateDirection = () => {
+      const nextY = window.scrollY;
+      if (nextY !== previousY) direction = nextY > previousY ? "down" : "up";
+      previousY = nextY;
+      document.documentElement.dataset.scrollDirection = direction;
+    };
+    window.addEventListener("scroll", updateDirection, { passive: true });
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
+          entry.target.setAttribute("data-motion", direction === "down" ? "from-below" : "from-above");
           entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
+        } else {
+          entry.target.setAttribute("data-motion", direction === "down" ? "exit-up" : "exit-down");
+          entry.target.classList.remove("is-visible");
         }
       });
-    }, { threshold: 0.12, rootMargin: "0px 0px -36px 0px" });
+    }, { threshold: 0.08, rootMargin: "0px 0px -10% 0px" });
     targets.forEach((target) => {
       target.classList.add("reveal");
       observer.observe(target);
     });
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("scroll", updateDirection);
+      delete document.documentElement.dataset.scrollDirection;
+    };
   }, [path]);
   const detail = path.startsWith("/projects/")
     ? projects.find((p) => path.split("/").pop() === p.slug)

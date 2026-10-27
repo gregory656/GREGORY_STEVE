@@ -1,13 +1,13 @@
 export const profile = {
   name: "Stephen Gregory Otieno",
-  monogram: "GS.",
+  monogram: "SG",
   role: "Software engineer & digital product builder",
   location: "Nairobi, Kenya",
   email: "gregorysteve656@gmail.com",
   phone: "+254 719 637 416",
   github: "https://github.com/gregory656",
   linkedin: "https://www.linkedin.com/in/gregory_.steve/",
-  availability: "Open to software engineering internships",
+  availability: "Open to software engineering roles",
   resume: "/documents/stephen-gregory-otieno-cv.pdf",
 } as const;
 

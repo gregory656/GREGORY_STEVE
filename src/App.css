@@ -1682,3 +1682,111 @@ a:hover > .arrow {
 @media(max-width:850px){.lab-display{grid-template-columns:1fr}.lab-pipeline{min-height:210px}.lab-readout{border-left:0;border-top:1px solid #fff2;padding:25px 28px}.systems-lab{padding-block:85px}}
 @media(max-width:560px){.lab-heading{gap:16px}.lab-orbit{width:52px;height:52px}.lab-orbit i:nth-child(1){transform:translate(0,-24px)}.lab-orbit i:nth-child(2){transform:translate(21px,10px)}.lab-orbit i:nth-child(3){transform:translate(-20px,12px)}.lab-pipeline{overflow-x:auto;justify-content:flex-start;padding:35px 18px;min-height:175px}.lab-node{flex:0 0 78px}.lab-signal-line{left:42px;right:auto;width:calc(100% - 84px)}.lab-readout{padding:22px}.future-path{padding:19px 45px 19px 18px}.future-path strong{font-size:16px}}
 @media(prefers-reduced-motion:reduce){.lab-orbit,.lab-signal-line:after,.node-signal,.lab-node,.lab-display{animation:none!important}}
+
+/* Portrait and flight scene */
+.brand-mark { border-radius:50%; isolation:isolate; overflow:visible; position:relative; border:2px solid #fff; box-shadow:0 0 0 1px #dcd7eb,0 5px 14px #26203222; }
+.brand-mark img { width:100%;height:100%;object-fit:cover;object-position:center 25%;border-radius:50%;filter:saturate(.88); }
+.brand-mark b { position:absolute;right:-6px;bottom:-2px;display:grid;place-items:center;width:21px;height:21px;border-radius:50%;background:#825fe0;color:#fff;border:2px solid #fff;font:700 7px var(--mono);letter-spacing:-.05em; }
+.brand-mark-compact b { width:17px;height:17px;right:-4px;bottom:-2px;font-size:6px; }
+.wordmark:hover .brand-mark img,.footer-mark:hover .brand-mark img { transform:scale(1.08);filter:saturate(1.2); }
+.brand-mark img { transition:transform .35s,filter .35s; }
+.portrait-frame { isolation:isolate; box-shadow:0 22px 65px #29203920; clip-path:polygon(0 0,100% 0,100% 92%,91% 100%,0 100%); }
+.portrait-frame:after { content:"";position:absolute;inset:0;z-index:1;border:1px solid #ffffff80;pointer-events:none; }
+.portrait-frame img { animation:portrait-drift 17s ease-in-out infinite alternate; filter:saturate(.92) contrast(1.035); }
+.hero-visual:before { border-color:#c8b9ef;animation:portrait-orbit 28s linear infinite; }
+.hero-visual:after { background:#8a68e8;box-shadow:0 0 0 5px #fff,0 0 18px 4px #a289e855;animation:orbit-beacon 2.3s ease-in-out infinite; }
+.portrait-caption span:first-child { color:#272433;font-weight:600; }
+.portrait-caption span:last-child { color:#8266c7; }
+.bird-flight { position:absolute;z-index:4;pointer-events:none;overflow:visible;width:calc(100% + 100px);height:100%;top:-12%;left:-8%; }
+.flight-path { stroke:#b6a2e3;stroke-width:1;stroke-dasharray:2 8;opacity:.58; }
+.bird { transform-box:view-box;transform-origin:center;animation:bird-cross 13s linear infinite; }
+.bird path { stroke:#423b57;stroke-width:2;stroke-linecap:round;stroke-linejoin:round; }
+.bird-two { animation-delay:-4.2s;transform:scale(.75); }
+.bird-three { animation-delay:-8.5s;transform:scale(.58); }
+.flight-star { fill:#b68bde;animation:star-pulse 2.5s ease-in-out infinite; }
+.star-two { animation-delay:1.2s;fill:#7bb9bc; }
+.hero-botanical { color:#9b83dd;filter:drop-shadow(0 4px 8px #8b70d329); }
+@keyframes portrait-drift { from{transform:scale(1.015) translateY(0);filter:saturate(.82) contrast(1.02)}to{transform:scale(1.075) translateY(-5px);filter:saturate(1.12) contrast(1.05)} }
+@keyframes portrait-orbit { to{transform:rotate(360deg)} }
+@keyframes orbit-beacon { 50%{box-shadow:0 0 0 7px #fff,0 0 0 9px #cbbbed,0 0 22px 7px #a289e855} }
+@keyframes bird-cross { 0%{translate:-18px 75px}100%{translate:100px -115px} }
+@keyframes star-pulse { 0%,100%{opacity:.35;scale:.8}50%{opacity:1;scale:1.7} }
+
+/* White canvas, luminous traces: keep the motion and let the diagram breathe. */
+.lab-display { background:#fff;color:#211f29;border:1px solid #ece9f3;box-shadow:0 24px 65px #3123530c; }
+.lab-display:before { opacity:.72;background-image:linear-gradient(#f0edf6 1px,transparent 1px),linear-gradient(90deg,#f0edf6 1px,transparent 1px);mask-image:linear-gradient(90deg,#000,transparent 92%); }
+.lab-signal-line { opacity:.72;filter:drop-shadow(0 0 5px #9a7bef72); }
+.lab-node { background:#fff;border-color:#e1daef;box-shadow:0 12px 34px #35275313; }
+.lab-node strong { color:#252130; }
+.lab-node small,.lab-node i { color:#8d81a4; }
+.node-signal { box-shadow:0 0 14px #83d9db; }
+.lab-readout { border-color:#eeeaf5; }
+.lab-readout h3 { color:#24212d; }
+.lab-readout p,.lab-live { color:#777180; }
+.lab-readout>span:first-child { color:#795bd0; }
+.lab-live i { background:#38aa86;box-shadow:0 0 9px #5ecba7; }
+.systems-lab { background:linear-gradient(180deg,#fff 0%,#fcfbff 48%,#fff 100%); }
+.about-art { background:#fff; }
+.engineering-scene { position:relative;z-index:1;width:min(100%,390px);height:auto;overflow:visible; }
+.human-orbit { transform-box:fill-box;transform-origin:center;animation:orbit-turn 32s linear infinite; }
+.orbit-two { animation-direction:reverse;animation-duration:24s; }
+.circuit-route { stroke-dasharray:4 7;animation:circuit-flow 9s linear infinite; }
+.route-two { animation-duration:13s;animation-direction:reverse; }
+.human-figure { transform-box:fill-box;transform-origin:center;animation:human-float 4.5s ease-in-out infinite;filter:drop-shadow(0 9px 10px #5d4b8e1c); }
+.human-halo { transform-box:fill-box;transform-origin:center;animation:halo-breathe 4s ease-in-out infinite; }
+.human-nodes circle { transform-box:fill-box;transform-origin:center;animation:node-beat 2.7s ease-in-out infinite; }
+.human-nodes circle:nth-child(even){animation-delay:-1.3s}
+.art-caption { padding:8px 11px;background:#ffffffd9;border-left:2px solid #a58be7;color:#615b6d;backdrop-filter:blur(6px); }
+@keyframes orbit-turn { to{transform:rotate(360deg)} }
+@keyframes circuit-flow { to{stroke-dashoffset:-88} }
+@keyframes human-float { 0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)} }
+@keyframes halo-breathe { 0%,100%{opacity:.65;transform:scale(.92)}50%{opacity:1;transform:scale(1.07)} }
+
+/* Project studies are bespoke visual worlds; the artwork has a gentle idle pulse and richer hover response. */
+.project-image { background:#fff; }
+.project-image img { animation:artwork-luminance 13s ease-in-out infinite alternate; }
+.project-row:nth-child(2) .project-image img { animation-delay:-3s; }
+.project-row:nth-child(3) .project-image img { animation-delay:-7s; }
+.project-row:nth-child(4) .project-image img { animation-delay:-4s; }
+.project-row:nth-child(5) .project-image img { animation-delay:-9s; }
+.project-image:hover img { transform:scale(1.05);filter:saturate(1.2) contrast(1.02); }
+@keyframes artwork-luminance { from{filter:saturate(.88)}to{filter:saturate(1.13)} }
+@media(max-width:680px){.bird-flight{width:calc(100% + 38px);left:-3%;top:-8%;}.engineering-scene{width:min(100%,340px)}.systems-lab{padding-inline:0}}
+@media(prefers-reduced-motion:reduce){.portrait-frame img,.hero-visual:before,.hero-visual:after,.bird,.flight-star,.human-orbit,.circuit-route,.human-figure,.human-halo,.human-nodes circle,.project-image img{animation:none!important;translate:none!important}.portrait-frame img{transform:none!important}}
+
+/* Direction-aware editorial reveals. A section exits as well as entering, so reverse scroll feels like a slide deck. */
+.reveal { opacity:0; transform:translate3d(0,36px,0) scale(.985); filter:blur(3px); transition:opacity .72s cubic-bezier(.2,.72,.2,1),transform .82s cubic-bezier(.2,.72,.2,1),filter .72s ease; will-change:opacity,transform; }
+.reveal[data-motion="from-above"],.reveal[data-motion="exit-down"] { transform:translate3d(0,-32px,0) scale(.987); }
+.reveal[data-motion="exit-up"] { transform:translate3d(0,-25px,0) scale(.99); }
+.reveal[data-motion="exit-down"] { transform:translate3d(0,25px,0) scale(.99); }
+.reveal.is-visible { opacity:1;transform:none;filter:none; }
+.reveal:focus-within { opacity:1;transform:none;filter:none; }
+.section-title.reveal { transition-delay:40ms; }
+.project-row.reveal:nth-child(odd),.skill-group.reveal:nth-child(odd) { transition-delay:65ms; }
+html[data-scroll-direction="up"] .reveal:not(.is-visible) { transition-duration:.58s; }
+
+/* A continuous editorial ticker, like a quiet broadcast strap, with real portfolio details. */
+.field-ticker { border-block:1px solid #e8e4ef;background:#faf9fd;padding:15px 0 13px;overflow:hidden;position:relative; }
+.ticker-heading { display:flex;justify-content:space-between;align-items:center;padding:0 max(5.2vw,24px) 11px;color:#827b8e;font:8px var(--mono);letter-spacing:.14em; }
+.ticker-heading span:first-child { display:flex;align-items:center;gap:8px;color:#302b3b;font-weight:500; }
+.ticker-heading i { width:6px;height:6px;border-radius:50%;background:#9a76e7;box-shadow:0 0 0 3px #9a76e71c;animation:ticker-beacon 2s ease-in-out infinite; }
+.ticker-window { overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 4%,#000 96%,transparent); }
+.ticker-track { width:max-content;display:flex;animation:ticker-drift 46s linear infinite; }
+.field-ticker:hover .ticker-track { animation-play-state:paused; }
+.ticker-set { flex:none;display:flex;align-items:center;gap:42px;padding-right:42px; }
+.ticker-note { display:flex;align-items:center;gap:11px;white-space:nowrap;color:#5d5867;font-size:11px; }
+.ticker-note b { color:#9b7add;font-size:13px;font-weight:400; }
+.ticker-note:nth-child(3n) b { color:#60aeb3; }
+.ticker-note:nth-child(3n + 1) b { color:#e58c6a; }
+.field-ticker-top { padding:9px 0 10px;background:#fff;border-color:#e8e4ef;color:#272433; }
+.field-ticker-top .ticker-heading { padding-bottom:7px;color:#827b8e; }
+.field-ticker-top .ticker-heading span:first-child { color:#302b3b; }
+.field-ticker-top .ticker-heading i { background:#9a76e7;box-shadow:0 0 0 3px #9a76e71c; }
+.field-ticker-top .ticker-note { color:#5d5867; }
+.field-ticker-top .ticker-note b { color:#9b7add; }
+.field-ticker-top .ticker-note:nth-child(3n) b { color:#60aeb3; }
+.field-ticker-top .ticker-note:nth-child(3n + 1) b { color:#e58c6a; }
+@keyframes ticker-drift { to { transform:translateX(-50%); } }
+@keyframes ticker-beacon { 50% { box-shadow:0 0 0 6px #9a76e72a;opacity:.68; } }
+@media(max-width:600px){.ticker-heading{padding-inline:22px}.ticker-set{gap:28px;padding-right:28px}.ticker-note{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1!important;transform:none!important;filter:none!important;transition:none!important;will-change:auto}.ticker-track,.ticker-heading i{animation:none!important}.ticker-track{transform:none}.ticker-set:nth-child(2){display:none}.field-ticker{overflow:visible}.ticker-window{mask-image:none;overflow-x:auto}}

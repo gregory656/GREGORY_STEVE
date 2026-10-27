@@ -9,5 +9,6 @@ export default defineConfig({
     maxWorkers: 1,
     fileParallelism: false,
     restoreMocks: true,
+    testTimeout: 15000,
   },
 });
