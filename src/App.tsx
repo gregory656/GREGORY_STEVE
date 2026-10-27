@@ -39,6 +39,17 @@ function Arrow({ diagonal = false }: { diagonal?: boolean }) {
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return <p className="eyebrow">{children}</p>;
 }
+function BrandMark({ compact = false }: { compact?: boolean }) {
+  return (
+    <span className={compact ? "brand-mark brand-mark-compact" : "brand-mark"} aria-hidden="true">
+      <svg viewBox="0 0 42 42" fill="none">
+        <path d="M18 8H7v9h11v10H6" stroke="currentColor" strokeWidth="3.2" strokeLinejoin="miter" />
+        <path d="M36 12V8H24v19h12v-9h-7" stroke="currentColor" strokeWidth="3.2" strokeLinejoin="miter" />
+        <circle cx="36" cy="36" r="2" fill="currentColor" />
+      </svg>
+    </span>
+  );
+}
 function SectionTitle({
   number,
   label,
@@ -124,7 +135,7 @@ function Header({
           }}
           aria-label="Stephen Gregory Otieno home"
         >
-          GS<span>.</span>
+          <BrandMark />
         </a>
         <nav
           className={menuOpen ? "main-nav is-open" : "main-nav"}
@@ -251,6 +262,9 @@ function Hero() {
         <div className="portrait-caption">
           <span>Stephen Gregory Otieno</span>
           <span>Engineer · Nairobi</span>
+        </div>
+        <div className="portrait-coordinate" aria-hidden="true">
+          <span>01</span><i /> <span>BUILT WITH INTENT</span>
         </div>
         <Botanical className="hero-botanical" />
         <span className="hero-side-note">
@@ -567,7 +581,7 @@ function Footer({ go }: { go: (to: string) => void }) {
           scrollTo({ top: 0, behavior: "smooth" });
         }}
       >
-        GS<span>.</span>
+        <BrandMark compact />
       </a>
       <span>Designed & built with intention · Nairobi, Kenya</span>
       <span>© {CURRENT_YEAR} Stephen Gregory Otieno</span>
@@ -589,6 +603,13 @@ function Home({
       <main id="main">
         <div id="top">
           <Hero />
+        </div>
+        <div className="signal-strip" aria-label="Engineering focus">
+          <span>PRODUCT THINKING</span><i />
+          <span>SOFTWARE ENGINEERING</span><i />
+          <span>HUMAN OUTCOMES</span><i />
+          <span>PRODUCT THINKING</span><i />
+          <span>SOFTWARE ENGINEERING</span>
         </div>
         <Work go={go} />
         <Toolkit onSkill={onSkill} />
@@ -936,6 +957,28 @@ export default function App() {
       "content",
       "Stephen Gregory Otieno is a Nairobi based software engineer building useful digital products and dependable systems.",
     );
+  }, [path]);
+  useEffect(() => {
+    const targets = document.querySelectorAll<HTMLElement>(
+      ".hero-copy, .hero-visual, .section-title, .project-row, .skill-group, .about-art, .about-copy > p, .journey-row, .credentials-section > *, .resume-section > *, .contact-title, .contact-details",
+    );
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+      targets.forEach((target) => target.classList.add("is-visible"));
+      return;
+    }
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: "0px 0px -36px 0px" });
+    targets.forEach((target) => {
+      target.classList.add("reveal");
+      observer.observe(target);
+    });
+    return () => observer.disconnect();
   }, [path]);
   const detail = path.startsWith("/projects/")
     ? projects.find((p) => path.split("/").pop() === p.slug)

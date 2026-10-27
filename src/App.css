@@ -1591,3 +1591,27 @@ a:hover > .arrow {
   color: #777;
   margin: 0;
 }
+.brand-mark { width:42px; height:42px; display:inline-grid; place-items:center; transition:transform .35s cubic-bezier(.2,.8,.2,1); }
+.brand-mark svg { width:100%; height:100%; }
+.brand-mark-compact { width:30px; height:30px; }
+.wordmark:hover .brand-mark, .footer-mark:hover .brand-mark { transform:rotate(-8deg) scale(1.06); }
+.hero-visual:before { content:""; position:absolute; width:calc(100% - 4px); aspect-ratio:1; border:1px solid #e8e5df; border-radius:50%; left:-14%; top:6%; pointer-events:none; }
+.hero-visual:after { content:""; position:absolute; width:7px; height:7px; background:#111; border-radius:50%; left:calc(-14% + 2px); top:calc(6% + 50%); box-shadow:0 0 0 5px #fff, 0 0 0 6px #d9d7d0; }
+.portrait-coordinate { position:absolute; left:-42px; top:47%; z-index:2; display:flex; align-items:center; gap:10px; writing-mode:vertical-rl; transform:rotate(180deg); color:#89877f; font:8px var(--mono); letter-spacing:.12em; }
+.portrait-coordinate i { width:1px; height:38px; background:#bbb8af; }
+.signal-strip { width:100%; min-height:62px; display:flex; align-items:center; justify-content:center; gap:clamp(18px,4vw,54px); overflow:hidden; border-block:1px solid var(--line); color:#77766f; font:9px var(--mono); letter-spacing:.14em; }
+.signal-strip i { width:4px; height:4px; flex:none; border-radius:50%; background:#aaa79e; }
+.button { position:relative; overflow:hidden; }
+.button:after { content:""; position:absolute; inset:0; transform:translateX(-110%); background:linear-gradient(105deg,transparent 25%,rgba(255,255,255,.2) 50%,transparent 75%); transition:transform .65s cubic-bezier(.2,.7,.2,1); }
+.button:hover:after { transform:translateX(110%); }
+.project-image:after { content:""; position:absolute; inset:0; border:1px solid rgba(17,17,17,.06); pointer-events:none; transition:inset .4s ease; }
+.project-image:hover:after { inset:9px; }
+.project-row.reveal, .skill-group.reveal { transition-duration:.75s; }
+.project-row.reveal:not(.is-visible), .skill-group.reveal:not(.is-visible) { transform:translateY(24px); }
+@media (max-width:680px) {
+  .hero-visual:before { left:-8%; top:8%; }
+  .hero-visual:after { left:calc(-8% + 2px); top:58%; }
+  .portrait-coordinate { left:-29px; }
+  .signal-strip { justify-content:flex-start; padding-inline:22px; gap:19px; min-height:54px; font-size:8px; }
+  .signal-strip span:nth-of-type(n+4), .signal-strip i:nth-of-type(n+3) { display:none; }
+}
