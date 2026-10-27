@@ -538,6 +538,11 @@ a:hover > .arrow {
   cursor: pointer;
   text-align: left;
 }
+.tech-logo { width: 15px; height: 15px; object-fit: contain; flex: 0 0 15px; opacity: .82; }
+.social-logo { width: 15px; height: 15px; object-fit: contain; }
+.skill-items button:focus-visible { color: #111; border-color: #bbb; background: #fff; }
+.filters button:focus-visible { outline-offset: 2px; }
+.contact-details .social-links a { display: inline-flex; align-items: center; gap: 7px; min-height: 42px; }
 .skill-items button:hover {
   color: #111;
   border-color: #ddd;

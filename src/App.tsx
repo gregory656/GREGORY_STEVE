@@ -39,6 +39,23 @@ function Arrow({ diagonal = false }: { diagonal?: boolean }) {
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return <p className="eyebrow">{children}</p>;
 }
+const brandSlugs: Record<string, string> = {
+  JavaScript: "javascript", TypeScript: "typescript", Python: "python", PHP: "php",
+  SQL: "postgresql", Java: "openjdk", "C++": "cplusplus",
+  C: "c", Dart: "dart", Kotlin: "kotlin", React: "react", "Next.js": "nextdotjs",
+  HTML: "html5", CSS: "css", "Tailwind CSS": "tailwindcss", Bootstrap: "bootstrap",
+  "Node.js": "nodedotjs", "Express.js": "express", Django: "django", Flask: "flask",
+  FastAPI: "fastapi", Laravel: "laravel", "Spring Boot": "springboot", PostgreSQL: "postgresql",
+  MySQL: "mysql", SQLite: "sqlite", MongoDB: "mongodb",
+  Firebase: "firebase", Redis: "redis", Docker: "docker", Linux: "linux", Git: "git",
+  GitHub: "github", "GitHub Actions": "githubactions",
+  Vitest: "vitest", Pytest: "pytest", Jest: "jest", pandas: "pandas",
+  NumPy: "numpy", "scikit-learn": "scikitlearn", PyTorch: "pytorch", TensorFlow: "tensorflow",
+};
+function TechMark({ name }: { name: string }) {
+  const slug = brandSlugs[name];
+  return slug ? <img className="tech-logo" src={`/icons/brands/${slug}.svg`} alt="" aria-hidden="true" loading="lazy" /> : null;
+}
 function BrandMark({ compact = false }: { compact?: boolean }) {
   return (
     <span className={compact ? "brand-mark brand-mark-compact" : "brand-mark"} aria-hidden="true">
@@ -200,7 +217,7 @@ function Hero() {
   const pointer = (e: React.PointerEvent<HTMLDivElement>) => {
     if (
       e.pointerType !== "mouse" ||
-      matchMedia("(prefers-reduced-motion: reduce)").matches
+      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
     )
       return;
     const r = e.currentTarget.getBoundingClientRect();
@@ -380,6 +397,7 @@ A product mindset."
                   onClick={() => onSkill(item)}
                   title={"Find projects using " + item}
                 >
+                  <TechMark name={item} />
                   {item}
                   <Arrow diagonal />
                 </button>
@@ -553,10 +571,10 @@ function ResumeContact() {
           </button>
           <div className="social-links">
             <a href={profile.github} target="_blank" rel="noreferrer">
-              GitHub <Arrow diagonal />
+            <img className="social-logo" src="/icons/brands/github.svg" alt="" aria-hidden="true" /> GitHub <Arrow diagonal />
             </a>
             <a href={profile.linkedin} target="_blank" rel="noreferrer">
-              LinkedIn <Arrow diagonal />
+            <svg className="social-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-11.8 7H5v9h2.2zm-.1-3.2a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6M19 13.5c0-2.5-1.3-3.7-3.1-3.7a2.7 2.7 0 0 0-2.4 1.3V10H11.3v9h2.2v-4.5c0-1.2.2-2.4 1.7-2.4s1.5 1.4 1.5 2.5V19H19z" /></svg> LinkedIn <Arrow diagonal />
             </a>
           </div>
           <a
@@ -678,11 +696,12 @@ function ProjectIndex({
           />
           <kbd>/</kbd>
         </label>
-        <div className="filters" aria-label="Project categories">
+        <div className="filters" role="group" aria-label="Project categories">
           {filters.map((f) => (
             <button
               key={f}
               className={filter === f ? "active" : ""}
+              aria-pressed={filter === f}
               onClick={() => setFilter(f)}
             >
               {f}
@@ -962,7 +981,7 @@ export default function App() {
     const targets = document.querySelectorAll<HTMLElement>(
       ".hero-copy, .hero-visual, .section-title, .project-row, .skill-group, .about-art, .about-copy > p, .journey-row, .credentials-section > *, .resume-section > *, .contact-title, .contact-details",
     );
-    if (matchMedia("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
+    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
       targets.forEach((target) => target.classList.add("is-visible"));
       return;
     }
