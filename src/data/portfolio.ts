@@ -4,9 +4,23 @@ export const profile = {
   role: "Software engineer & digital product builder",
   location: "Nairobi, Kenya",
   email: "gregorysteve656@gmail.com",
-  phone: "+254 719 637 416",
+  phone: "+254 182 292 2287",
   github: "https://github.com/gregory656",
   linkedin: "https://www.linkedin.com/in/gregory_.steve/",
+  learningProfiles: [
+    { name: "HackerRank", url: "https://www.hackerrank.com/profile/gregory656", detail: "Python & SQL skills tests · coding challenges", icon: "hackerrank" },
+    { name: "LeetCode", url: "https://leetcode.com/u/gregory656/", detail: "DSA problems · interview patterns", icon: "leetcode" },
+    { name: "freeCodeCamp", url: "https://www.freecodecamp.org/gregory656", detail: "Guided curriculum · certification projects", icon: "freecodecamp" },
+    { name: "DeepLearning.AI", url: "https://www.deeplearning.ai/courses/", detail: "AI & machine learning courses", icon: "deeplearning" },
+    { name: "Hugging Face", url: "https://huggingface.co/gregory656", detail: "LLM learning · models · datasets · demos", icon: "huggingface" },
+    { name: "GitHub", url: "https://github.com/gregory656", detail: "Projects · source code · collaboration", icon: "github" },
+    { name: "CodeChef", url: "https://www.codechef.com/users/brill_tale_25", detail: "DSA practice · timed programming contests", icon: "codechef" },
+    { name: "Frontend Mentor", url: "https://www.frontendmentor.io/profile/gregory656", detail: "Real-world UI challenges · portfolio projects", icon: "frontendmentor" },
+    { name: "Exercism", url: "https://exercism.org/profiles/gregory656", detail: "Language tracks · practice exercises · mentoring", icon: "exercism" },
+    { name: "Codeforces", url: "https://codeforces.com/profile/gregorysteve656", detail: "Competitive programming · DSA contests", icon: "codeforces" },
+    { name: "Codewars", url: "https://www.codewars.com/users/gregorysteve65", detail: "Kata · bite-size coding problems", icon: "codewars" },
+    { name: "W3Schools", url: "https://www.w3profile.com/gregory656", detail: "Web development tutorials · guided practice", icon: "w3schools" },
+  ],
   availability: "Open to software engineering roles",
   resume: "/documents/stephen-gregory-otieno-cv.pdf",
 } as const;
@@ -28,6 +42,7 @@ export type Project = {
   image: string;
   imageAlt: string;
   github: string;
+  downloadUrl?: string;
   concept?: boolean;
 };
 
@@ -56,6 +71,7 @@ export const projects: Project[] = [
     lessons:
       "A compelling community product depends on trust, clear moderation paths, and a marketplace that never overwhelms the social experience.",
     url: "https://siviq.top",
+    downloadUrl: "https://play.google.com/store/apps/details?id=com.siviq.africa",
     image: "/images/project-siviq.svg",
     imageAlt:
       "Editorial illustration of a campus community and marketplace interface",
@@ -263,6 +279,12 @@ export const skillGroups = [
   },
 ] as const;
 
+export const learningFocus = [
+  { name: "Engineering fundamentals", items: ["Data structures & algorithms", "OOP & functional basics", "HTTP, REST & authentication", "Git & team workflows"] },
+  { name: "Reliable applications", items: ["Unit, integration & end-to-end testing", "Debugging & code review", "Database design & indexing", "Docker, CI/CD & application security"] },
+  { name: "LLM applications", items: ["LLM APIs & structured outputs", "Prompt and context design", "Tool calling & AI agents", "RAG, embeddings & vector search", "Evaluation, guardrails, privacy & cost"] },
+] as const;
+
 export const education = [
   {
     degree: "Bachelor of Science in Software Engineering",
@@ -275,6 +297,15 @@ export const education = [
 ] as const;
 
 export const futureDirection = "MSc in Embedded Systems & IoT";
+
+export const hiringRoleGroups = [
+  { name: "Product engineering", roles: ["Software Engineer", "Full-Stack Engineer", "Frontend Engineer", "Backend Engineer", "Web Application Developer", "API & Integration Engineer"] },
+  { name: "AI & intelligent applications", roles: ["AI Application Engineer", "LLM Application Engineer", "RAG / Knowledge Systems Engineer", "Generative AI Developer", "Python Developer", "TypeScript Developer"] },
+  { name: "Systems & quality", roles: ["Cloud / Platform Engineer", "DevOps & CI/CD Engineer", "QA Automation Engineer", "Systems Integration Engineer", "IoT / Edge Software Engineer"] },
+] as const;
+
+export const workSetups = ["Remote", "Hybrid", "On-site · Nairobi"] as const;
+export const engagementTypes = ["Full-time", "Contract", "Part-time", "Freelance", "Internship"] as const;
 
 export const experience = [
   {

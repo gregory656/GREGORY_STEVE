@@ -2,10 +2,14 @@ import { useEffect, useMemo, useState } from "react";
 import {
   education,
   experience,
+  engagementTypes,
   futureDirection,
+  hiringRoleGroups,
+  learningFocus,
   profile,
   projects,
   skillGroups,
+  workSetups,
 } from "./data/portfolio";
 import type { Project } from "./data/portfolio";
 import {
@@ -13,7 +17,12 @@ import {
   ArrowLeft,
   ArrowRight,
   ArrowUpRight,
+  Code2,
+  Cpu,
+  Mail,
+  Phone,
   Plus,
+  Play,
   Search,
 } from "lucide-react";
 import "./App.css";
@@ -69,6 +78,39 @@ function BrandMark({ compact = false }: { compact?: boolean }) {
     <span className={compact ? "brand-mark brand-mark-compact" : "brand-mark"} aria-hidden="true">
       <img src="/images/steve.jpg" alt="" />
       <b>SG</b>
+    </span>
+  );
+}
+function CvBuddy() {
+  return (
+    <span className="cv-buddy" aria-hidden="true">
+      <span className="cv-buddy-bubble cv-buddy-plea">Pretty please?</span>
+      <span className="cv-buddy-bubble cv-buddy-cheer">You made my day!</span>
+      <svg viewBox="0 0 92 84" fill="none">
+        <path className="buddy-arm buddy-arm-left" d="M29 44 16 34" />
+        <path className="buddy-arm buddy-arm-right" d="m64 43 12-12" />
+        <circle className="buddy-hand" cx="14" cy="32" r="4" />
+        <circle className="buddy-hand" cx="78" cy="29" r="4" />
+        <rect className="buddy-paper" x="27" y="8" width="40" height="57" rx="9" />
+        <path className="buddy-paper-fold" d="M54 9v11h12" />
+        <path className="buddy-detail" d="M35 54h24M35 59h15" />
+        <path className="buddy-leg" d="m38 65-3 7m20-7 3 7" />
+        <g className="buddy-pleading-face">
+          <path className="buddy-brow" d="m36 31 5 2m12-2 5-2" />
+          <circle className="buddy-eye" cx="40" cy="37" r="2" />
+          <circle className="buddy-eye" cx="54" cy="37" r="2" />
+          <path className="buddy-mouth" d="M43 47q4-5 8 0" />
+          <path className="buddy-tear" d="M36 40q-4 6 0 8 4-2 0-8Zm22 0q-4 6 0 8 4-2 0-8Z" />
+        </g>
+        <g className="buddy-laugh-face">
+          <path className="buddy-laugh-eye" d="m37 36 5 3 4-3m5 0 4 3 5-3" />
+          <path className="buddy-grin" d="M40 42q7 13 14 0-7 4-14 0Z" />
+          <circle className="buddy-cheek" cx="34" cy="42" r="2" />
+          <circle className="buddy-cheek" cx="60" cy="42" r="2" />
+        </g>
+        <path className="buddy-sparkle sparkle-one" d="M12 11v8m-4-4h8" />
+        <path className="buddy-sparkle sparkle-two" d="M78 55v6m-3-3h6" />
+      </svg>
     </span>
   );
 }
@@ -226,7 +268,7 @@ function EngineeringScene() {
     <path className="circuit-route route-one" d="M31 92h65l25 25h44m224 194h-73l-29-29h-41M82 340h45l31-31h35m140-238h-43l-25 25h-30" stroke="#b8a5ed"/>
     <path className="circuit-route route-two" d="M49 222h76l20-20h38m188-84h-58l-25 26h-45m-213 101h54l30 29h44m204-18h-51l-28 29h-37" stroke="#a7dbe2"/>
     <g className="human-figure"><circle cx="210" cy="164" r="30" fill="#fff" stroke="#22202b" strokeWidth="2"/><path d="M154 282c4-43 26-66 56-66s52 23 56 66" fill="#fff" stroke="#22202b" strokeWidth="2"/><path d="M173 238c13 13 26 19 37 19s24-6 37-19" stroke="#b5a1ed" strokeWidth="3" strokeLinecap="round"/></g>
-    <g className="human-nodes"><circle cx="96" cy="117" r="7" fill="#f3a17f"/><circle cx="344" cy="142" r="6" fill="#8dcad3"/><circle cx="129" cy="309" r="7" fill="#8dcad3"/><circle cx="330" cy="292" r="8" fill="#b99df1"/><circle cx="63" cy="222" r="4" fill="#f3a17f"/></g>
+    <g className="human-nodes"><rect x="92" y="113" width="8" height="8" rx="1" fill="#f3a17f"/><rect x="341" y="139" width="6" height="6" rx="1" fill="#8dcad3"/><rect x="125" y="305" width="8" height="8" rx="1" fill="#8dcad3"/><rect x="326" y="288" width="8" height="8" rx="1" fill="#b99df1"/><rect x="61" y="220" width="4" height="4" rx="1" fill="#f3a17f"/></g>
     <text x="210" y="365" textAnchor="middle" fill="#85808d" fontFamily="monospace" fontSize="9" letterSpacing="3">PEOPLE AT THE CENTER / SYSTEMS AROUND</text>
   </svg>;
 }
@@ -235,8 +277,8 @@ function FieldTicker({ top = false }: { top?: boolean }) {
     ? ["Open to software engineering roles", "Nairobi · Kenya", "LLM systems · evidence first", "Systems design + critical thinking", "MSc Embedded Systems & IoT · future direction", "Neural Atlas + Field Echo concept studies"]
     : ["Nairobi · Kenya", "Building useful products", "LLM systems · evidence first", "Critical thinking in practice", "MSc Embedded Systems & IoT · future direction", "Design for the failure path", "Open to software engineering roles"];
   return <section className={top ? "field-ticker field-ticker-top" : "field-ticker"} aria-label={top ? "Portfolio news highlights" : "Portfolio field notes"}>
-    <div className="ticker-heading"><span><i /> {top ? "PORTFOLIO SIGNAL" : "FIELD NOTES"}</span><span>{top ? "AT A GLANCE" : "PROJECT SIGNAL / 01—07"}</span></div>
-    <div className="ticker-window" aria-hidden="true"><div className="ticker-track">{[0, 1].map((loop) => <div className="ticker-set" key={loop}>{notes.map((note) => <span className="ticker-note" key={note}><b>✳</b>{note}</span>)}</div>)}</div></div>
+    <div className="ticker-heading"><span><Cpu className="ticker-engineering-mark" size={12} strokeWidth={1.6} aria-hidden="true" /> {top ? "PORTFOLIO SIGNAL" : "FIELD NOTES"}</span><span>{top ? "AT A GLANCE" : "PROJECT SIGNAL / 01—07"}</span></div>
+    <div className="ticker-window" aria-hidden="true"><div className="ticker-track">{[0, 1].map((loop) => <div className="ticker-set" key={loop}>{notes.map((note, noteIndex) => <span className="ticker-note" key={note}><b className="ticker-index">{String(noteIndex + 1).padStart(2, "0")}</b>{note}</span>)}</div>)}</div></div>
     <p className="sr-only">{notes.join(". ")}</p>
   </section>;
 }
@@ -246,7 +288,7 @@ function BirdFlight() {
     <g className="bird bird-one"><path d="M0 11Q8 2 16 11Q24 2 32 11"/></g>
     <g className="bird bird-two"><path d="M0 10Q6 3 12 10Q18 3 24 10"/></g>
     <g className="bird bird-three"><path d="M0 8Q5 2 10 8Q15 2 20 8"/></g>
-    <circle className="flight-star star-one" cx="405" cy="74" r="2"/><circle className="flight-star star-two" cx="100" cy="76" r="2"/>
+    <rect className="flight-star star-one" x="403" y="72" width="4" height="4"/><rect className="flight-star star-two" x="98" y="74" width="4" height="4"/>
   </svg>;
 }
 function Hero() {
@@ -271,7 +313,7 @@ function Hero() {
     >
       <div className="hero-copy">
         <Eyebrow>
-          <span className="availability-dot" /> Software engineer ·{" "}
+          <Code2 className="availability-mark" size={13} strokeWidth={1.7} aria-hidden="true" /> Software engineer ·{" "}
           {profile.location}
         </Eyebrow>
         <h1>
@@ -289,9 +331,12 @@ function Hero() {
           <a className="button button-dark" href="#work">
             Explore my work <Arrow diagonal />
           </a>
-          <a className="text-link" href={profile.resume} download>
-            Download résumé <Arrow />
-          </a>
+          <span className="cv-invite">
+            <a className="text-link cv-download" href={profile.resume} download>
+              Download résumé <Arrow />
+            </a>
+            <CvBuddy />
+          </span>
         </div>
         <div className="hero-meta">
           <span>{profile.availability}</span>
@@ -318,7 +363,7 @@ function Hero() {
           <span>Engineer · Nairobi</span>
         </div>
         <div className="portrait-coordinate" aria-hidden="true">
-          <span>01</span><i /> <span>BUILT WITH INTENT</span>
+          <span>01</span><span className="coordinate-trace" aria-hidden="true" /> <span>BUILT WITH INTENT</span>
         </div>
         <BirdFlight />
         <Botanical className="hero-botanical" />
@@ -381,6 +426,7 @@ function ProjectRow({
             Read the case study <Arrow diagonal />
           </button>
           <a className="project-repo-link" href={project.github} target="_blank" rel="noreferrer"><BrandGlyph name="GitHub" /> GitHub profile <Arrow diagonal /></a>
+          {project.downloadUrl && <a className="project-download-link" href={project.downloadUrl} target="_blank" rel="noreferrer"><Play className="play-mark" size={13} fill="currentColor" aria-hidden="true" /> Get Siviq on Google Play <Arrow diagonal /></a>}
         </div>
       </div>
     </article>
@@ -443,6 +489,29 @@ A product mindset."
           </div>
         ))}
       </div>
+      <div className="learning-focus">
+        <div className="learning-focus-heading">
+          <Eyebrow>How I build</Eyebrow>
+          <h3>Strong foundations.<br /><em>Useful AI.</em></h3>
+          <p>Engineering skills that make AI assisted work understandable, testable, and ready for real users.</p>
+        </div>
+        <div className="focus-groups">
+          {learningFocus.map((group, i) => <article className="focus-card" key={group.name}>
+            <span className="focus-index">0{i + 1}</span><h4>{group.name}</h4>
+            <ul>{group.items.map((item) => <li key={item}>{item}</li>)}</ul>
+          </article>)}
+        </div>
+      </div>
+      <div className="learning-profiles">
+        <div className="profiles-heading"><div><Eyebrow>Practice & community</Eyebrow><h3>Find me learning <em>in the open.</em></h3></div><p>Practice, coursework, and code in one place.</p></div>
+        <div className="profile-card-grid">
+          {profile.learningProfiles.map((item) => <a className="learning-profile-card" href={item.url} target="_blank" rel="noreferrer" key={item.name}>
+            <span className="platform-icon"><img src={`/icons/brands/${item.icon}.${item.icon === "deeplearning" ? "png" : "svg"}`} alt="" loading="lazy" /></span>
+            <span className="platform-copy"><strong>{item.name}</strong><small>{item.detail}</small></span><Arrow diagonal />
+          </a>)}
+        </div>
+        <p className="profile-note">DeepLearning.AI links to its course library; it does not expose a standard public learner profile URL.</p>
+      </div>
       <p className="toolkit-note">
         A learning map, not a claim that every tool appears in shipped work. Project pages distinguish live work from architecture concepts.
       </p>
@@ -466,7 +535,7 @@ function SystemsLab() {
           {active.nodes.map((node, i) => <div className="lab-node" key={node} style={{ "--node-index": i } as React.CSSProperties}><span className="node-signal" /><small>0{i + 1}</small><strong>{node}</strong><i>{i === active.nodes.length - 1 ? "OUTPUT" : "PROCESS"}</i></div>)}
           <div className="lab-signal-line" aria-hidden="true" />
         </div>
-        <div className="lab-readout"><span>DESIGN PRINCIPLE / {active.name}</span><h3>{active.signal}</h3><p>Explore the diagram as a systems-thinking exercise. It describes a design direction, not a claim of production deployment.</p><span className="lab-live"><i /> MODEL: CONCEPTUAL · STATUS: EXPLORING</span></div>
+        <div className="lab-readout"><span>DESIGN PRINCIPLE / {active.name}</span><h3>{active.signal}</h3><p>Explore the diagram as a systems-thinking exercise. It describes a design direction, not a claim of production deployment.</p><span className="lab-live"><Cpu size={11} strokeWidth={1.6} aria-hidden="true" /> MODEL: CONCEPTUAL · STATUS: EXPLORING</span></div>
       </div>
     </section>
   );
@@ -571,6 +640,12 @@ function Credentials() {
 }
 function ResumeContact() {
   const [copied, setCopied] = useState(false);
+  const [selectedRole, setSelectedRole] = useState("Full-Stack Engineer");
+  const [selectedSetup, setSelectedSetup] = useState<string>("Remote");
+  const [selectedEngagement, setSelectedEngagement] = useState<string>("Full-time");
+  const hiringMessage = "Hi Stephen, I’d like to discuss hiring you as a " + selectedRole + ". Work setup: " + selectedSetup + ". Engagement: " + selectedEngagement + ". Company: [company name]. Location: [city / country]. Could we talk?";
+  const whatsappLink = "https://wa.me/" + profile.phone.replace(/\D/g, "") + "?text=" + encodeURIComponent(hiringMessage);
+  const emailLink = "mailto:" + profile.email + "?subject=" + encodeURIComponent("Hiring inquiry · " + selectedRole) + "&body=" + encodeURIComponent(hiringMessage);
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(profile.email);
@@ -602,41 +677,31 @@ function ResumeContact() {
           </span>
         </a>
       </section>
-      <section id="contact" className="contact-section section-wrap">
-        <div className="contact-title">
-          <Eyebrow>05 · Contact</Eyebrow>
-          <h2>
-            Have a problem
-            <br />
-            worth <em>solving?</em>
-          </h2>
-          <p>
-            I’m open to internship opportunities and collaborative product work.
-          </p>
+      <section id="contact" className="contact-section hire-section section-wrap">
+        <div className="hire-topline"><Eyebrow>05 · Hire me / open channel</Eyebrow><span className="hire-live"><Cpu size={12} strokeWidth={1.6} aria-hidden="true" /> OPEN TO OPPORTUNITIES</span></div>
+        <div className="hire-hero">
+          <div className="hire-heading"><h2>Bring me the<br />interesting <em>problem.</em></h2><p>Remote-first and open to full-time, contract, part-time, freelance, or internship opportunities. Pick a role below and I’ll tailor the introduction for you.</p></div>
+          <div className="hire-orbit" aria-hidden="true"><span className="hire-orbit-ring ring-a" /><span className="hire-orbit-ring ring-b" /><span className="hire-orbit-core">SG</span><i className="orbit-dot dot-a" /><i className="orbit-dot dot-b" /><i className="orbit-dot dot-c" /><span className="orbit-caption">GOOD WORK / GOOD PEOPLE</span></div>
         </div>
-        <div className="contact-details">
-          <a className="email-link" href={"mailto:" + profile.email}>
-            {profile.email}
-            <Arrow diagonal />
-          </a>
-          <button className="copy-email" onClick={copy}>
-            {copied ? "Copied to clipboard" : "Copy email"}
-          </button>
-          <div className="social-links">
-            <a href={profile.github} target="_blank" rel="noreferrer">
-            <BrandGlyph name="GitHub" /> GitHub <Arrow diagonal />
-            </a>
-            <a href={profile.linkedin} target="_blank" rel="noreferrer">
-            <svg className="social-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-11.8 7H5v9h2.2zm-.1-3.2a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6M19 13.5c0-2.5-1.3-3.7-3.1-3.7a2.7 2.7 0 0 0-2.4 1.3V10H11.3v9h2.2v-4.5c0-1.2.2-2.4 1.7-2.4s1.5 1.4 1.5 2.5V19H19z" /></svg> LinkedIn <Arrow diagonal />
-            </a>
+        <div className="hire-builder">
+          <div className="hire-roles">
+            <div className="hire-section-heading"><span>01</span><div><h3>What are you hiring for?</h3><p>Select a role to personalize your message.</p></div></div>
+            {hiringRoleGroups.map((group) => <div className="hire-role-group" key={group.name}><h4>{group.name}</h4><div className="hire-role-list">{group.roles.map((role) => <button key={role} aria-pressed={selectedRole === role} onClick={() => setSelectedRole(role)}>{role}<span>↗</span></button>)}</div></div>)}
           </div>
-          <a
-            className="phone-link"
-            href={"tel:" + profile.phone.replaceAll(" ", "")}
-          >
-            {profile.phone}
-          </a>
+          <div className="hire-brief">
+            <div className="hire-section-heading"><span>02</span><div><h3>Shape the opportunity</h3><p>Choose what fits your team and project.</p></div></div>
+            <fieldset className="hire-choice"><legend>Work setup</legend><div>{workSetups.map((setup) => <button type="button" key={setup} aria-pressed={selectedSetup === setup} onClick={() => setSelectedSetup(setup)}>{setup}</button>)}</div></fieldset>
+            <fieldset className="hire-choice"><legend>Engagement</legend><div>{engagementTypes.map((engagement) => <button type="button" key={engagement} aria-pressed={selectedEngagement === engagement} onClick={() => setSelectedEngagement(engagement)}>{engagement}</button>)}</div></fieldset>
+            <div className="hire-preview"><span>YOUR INTRO, PREPARED</span><strong>{selectedRole}</strong><p>{selectedSetup} · {selectedEngagement}</p><Cpu className="hire-preview-cpu" size={21} strokeWidth={1.4} aria-hidden="true" /></div>
+            <div className="hire-actions">
+              <a className="hire-action hire-whatsapp" href={whatsappLink} target="_blank" rel="noreferrer"><img className="whatsapp-logo" src="/icons/brands/whatsapp.svg" alt="" aria-hidden="true" /><span><b>Start on WhatsApp</b><small>Opens a ready-to-send hiring brief</small></span><Arrow diagonal /></a>
+              <a className="hire-action" href={emailLink}><Mail size={18} aria-hidden="true" /><span><b>Hire by email</b><small>{profile.email}</small></span><Arrow diagonal /></a>
+              <a className="hire-action" href={"tel:" + profile.phone.replace(/\D/g, "")}><Phone size={18} aria-hidden="true" /><span><b>Call me</b><small>{profile.phone}</small></span><Arrow diagonal /></a>
+            </div>
+            <button className="copy-email" onClick={copy}>{copied ? "Email copied — ready when you are" : "Or copy my email address"}</button>
+          </div>
         </div>
+        <div className="hire-footerline"><span>SELECT A ROLE · SET THE MODE · LET’S TALK</span><div className="social-links"><a href={profile.github} target="_blank" rel="noreferrer"><BrandGlyph name="GitHub" /> GitHub <Arrow diagonal /></a><a href={profile.linkedin} target="_blank" rel="noreferrer"><svg className="social-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zm-11.8 7H5v9h2.2zm-.1-3.2a1.3 1.3 0 1 0 0 2.6 1.3 1.3 0 0 0 0-2.6M19 13.5c0-2.5-1.3-3.7-3.1-3.7a2.7 2.7 0 0 0-2.4 1.3V10H11.3v9h2.2v-4.5c0-1.2.2-2.4 1.7-2.4s1.5 1.4 1.5 2.5V19H19z" /></svg> LinkedIn <Arrow diagonal /></a></div></div>
       </section>
     </>
   );
@@ -677,10 +742,10 @@ function Home({
           <Hero />
         </div>
         <div className="signal-strip" aria-label="Engineering focus">
-          <span>PRODUCT THINKING</span><i />
-          <span>SOFTWARE ENGINEERING</span><i />
-          <span>HUMAN OUTCOMES</span><i />
-          <span>PRODUCT THINKING</span><i />
+          <span className="signal-label">PRODUCT THINKING</span><i className="signal-trace" aria-hidden="true" />
+          <span className="signal-label">SOFTWARE ENGINEERING</span><i className="signal-trace" aria-hidden="true" />
+          <span className="signal-label">HUMAN OUTCOMES</span><i className="signal-trace" aria-hidden="true" />
+          <span className="signal-label">PRODUCT THINKING</span><i className="signal-trace" aria-hidden="true" />
           <span>SOFTWARE ENGINEERING</span>
         </div>
         <Work go={go} />
@@ -817,7 +882,7 @@ function CaseStudy({
         </Eyebrow>
         <h1>{project.title}</h1>
         <p>{project.description}</p>
-        <div className="case-meta">
+        <div className={project.downloadUrl ? "case-meta case-meta-download" : "case-meta"}>
           <span>
             <small>ROLE</small>
             {project.role}
@@ -832,6 +897,7 @@ function CaseStudy({
               {project.concept ? <><BrandGlyph name="GitHub" /> GitHub profile</> : <>Visit project <Arrow diagonal /></>}
             </a>
           </span>
+          {project.downloadUrl && <span className="case-store-meta"><small>ANDROID APP</small><a href={project.downloadUrl} target="_blank" rel="noreferrer"><Play className="play-mark" size={13} fill="currentColor" aria-hidden="true" /> Download on Google Play <Arrow diagonal /></a></span>}
         </div>
       </div>
       <img className="case-cover" src={project.image} alt={project.imageAlt} />
