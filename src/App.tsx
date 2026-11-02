@@ -510,10 +510,10 @@ A product mindset."
             <span className="platform-copy"><strong>{item.name}</strong><small>{item.detail}</small></span><Arrow diagonal />
           </a>)}
         </div>
-        <p className="profile-note">DeepLearning.AI links to its course library; it does not expose a standard public learner profile URL.</p>
+        <p className="profile-note">DeepLearning.View course library</p>
       </div>
       <p className="toolkit-note">
-        A learning map, not a claim that every tool appears in shipped work. Project pages distinguish live work from architecture concepts.
+      DeepLearning.View course library
       </p>
     </section>
   );
@@ -559,7 +559,7 @@ function About({ go }: { go: (to: string) => void }) {
 people in mind."
         />
         <p className="about-lede">
-          I’m Stephen, a software engineer and digital product builder based in
+          I’m Gregory Steve, a software engineer and digital product builder based in
           Nairobi.
         </p>
         <p>
@@ -631,7 +631,7 @@ function Credentials() {
         <div>
           <h3>Certificates</h3>
           <p>
-            Credentials will be added as they’re earned. For now, the focus is on learning in public and building thoughtful systems.
+            See My Certificates
           </p>
         </div>
       </div>
@@ -643,7 +643,7 @@ function ResumeContact() {
   const [selectedRole, setSelectedRole] = useState("Full-Stack Engineer");
   const [selectedSetup, setSelectedSetup] = useState<string>("Remote");
   const [selectedEngagement, setSelectedEngagement] = useState<string>("Full-time");
-  const hiringMessage = "Hi Stephen, I’d like to discuss hiring you as a " + selectedRole + ". Work setup: " + selectedSetup + ". Engagement: " + selectedEngagement + ". Company: [company name]. Location: [city / country]. Could we talk?";
+  const hiringMessage = "Hi Gregory Steve, I’d like to discuss hiring you as a " + selectedRole + ". Work setup: " + selectedSetup + ". Engagement: " + selectedEngagement + ". Company: [company name]. Location: [city / country]. Could we talk?";
   const whatsappLink = "https://wa.me/" + profile.phone.replace(/\D/g, "") + "?text=" + encodeURIComponent(hiringMessage);
   const emailLink = "mailto:" + profile.email + "?subject=" + encodeURIComponent("Hiring inquiry · " + selectedRole) + "&body=" + encodeURIComponent(hiringMessage);
   const copy = async () => {
@@ -941,7 +941,7 @@ function CaseStudy({
                 project.technologies.map((t) => <span key={t}>{t}</span>)
               ) : (
                 <p>
-                  Stack details aren’t part of this portfolio entry yet.
+                  View Tech stack used...
                 </p>
               )}
             </div>

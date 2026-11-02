@@ -1,7 +1,7 @@
 export const profile = {
   name: "Stephen Gregory Otieno",
-  monogram: "SG",
-  role: "Software engineer & digital product builder",
+  monogram: "SO",
+  role: "Software engineer|Entrepreneur|Digital Products Builder",
   location: "Nairobi, Kenya",
   email: "gregorysteve656@gmail.com",
   phone: "+254 182 292 2287",
@@ -21,7 +21,7 @@ export const profile = {
     { name: "Codewars", url: "https://www.codewars.com/users/gregorysteve65", detail: "Kata · bite-size coding problems", icon: "codewars" },
     { name: "W3Schools", url: "https://www.w3profile.com/gregory656", detail: "Web development tutorials · guided practice", icon: "w3schools" },
   ],
-  availability: "Open to software engineering roles",
+  availability: "Open to Software Engineering Roles",
   resume: "/documents/stephen-gregory-otieno-cv.pdf",
 } as const;
 
@@ -292,7 +292,7 @@ export const education = [
   },
   {
     degree: "Bachelor of Science in Computer Science",
-    institution: "University of the People · Online",
+    institution: "University of the People ",
   },
 ] as const;
 
@@ -309,9 +309,9 @@ export const engagementTypes = ["Full-time", "Contract", "Part-time", "Freelance
 
 export const experience = [
   {
-    role: "Web Development and Digital Solutions",
+    role: "Lead Developer TopHeights ",
     organization: "Top Heights Electricals",
     detail:
-      "Website development, customer facing service information, responsive presentation, usability, and troubleshooting.",
+      "mobile appp development, customer facing service information, responsive presentation, usability, and troubleshooting.",
   },
 ] as const;
