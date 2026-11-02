@@ -21,7 +21,6 @@ import {
   Cpu,
   Mail,
   Phone,
-  Plus,
   Play,
   Search,
 } from "lucide-react";
@@ -29,6 +28,12 @@ import "./App.css";
 
 const CURRENT_YEAR = new Date().getFullYear();
 const PROJECT_FILTERS = ["All", "Campus", "Education", "Business", "AI / LLM", "Systems / IoT"];
+const certificates = [
+  // Reuse this shape for new credentials: add one object and replace its title and links.
+  { title: "SQL Basic", url: "https://www.hackerrank.com/certificates/cceabf8651a9", embed: "https://www.hackerrank.com/certificates/iframe/cceabf8651a9" },
+  { title: "SQL Intermediate", url: "https://www.hackerrank.com/certificates/26e6e540649f", embed: "https://www.hackerrank.com/certificates/iframe/26e6e540649f" },
+  { title: "SQL Advanced", url: "https://www.hackerrank.com/certificates/9ceab2ee56f4", embed: "https://www.hackerrank.com/certificates/iframe/9ceab2ee56f4" },
+];
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
   return diagonal ? (
@@ -209,6 +214,7 @@ function Header({
           <button onClick={() => jump("about")}>About</button>
           <button onClick={() => jump("toolkit")}>Toolkit</button>
           <button onClick={() => jump("education")}>Journey</button>
+          <button onClick={() => jump("certificates")}>Certificates</button>
           <a href={profile.resume} download>
             Résumé <Arrow diagonal />
           </a>
@@ -619,22 +625,18 @@ function Journey() {
 }
 function Credentials() {
   return (
-    <section className="credentials-section section-wrap">
-      <div>
+    <section className="credentials-section section-wrap" id="certificates">
+      <div className="credentials-heading">
+        <span className="certificate-orbit" aria-hidden="true"><i /><i /><i /></span>
         <Eyebrow>Credentials</Eyebrow>
-        <h2>Proof over promises.</h2>
+        <h2>Proof over <em>promises.</em></h2>
+        <p>SQL credentials, displayed directly from the issuing platform.</p>
+        <a className="certificate-profile-link" href="https://www.hackerrank.com/profile/gregorysteve656" target="_blank" rel="noreferrer">HackerRank profile <Arrow diagonal /></a>
       </div>
-      <div className="credential-note">
-        <span className="credential-mark">
-          <Plus aria-hidden="true" size={22} strokeWidth={1.2} />
-        </span>
-        <div>
-          <h3>Certificates</h3>
-          <p>
-            See My Certificates
-          </p>
-        </div>
-      </div>
+      <div className="certificate-feed">{certificates.map((certificate) => <article className="certificate-post" key={certificate.title}>
+        <iframe className="certificate-frame" src={certificate.embed} title={`${certificate.title} certificate`} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" />
+        <a className="certificate-open-link" href={certificate.url} target="_blank" rel="noreferrer" aria-label={`Open ${certificate.title} certificate`}>{certificate.title} <Arrow diagonal /></a>
+      </article>)}</div>
     </section>
   );
 }
