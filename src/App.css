@@ -1871,6 +1871,8 @@ html[data-scroll-direction="up"] .reveal:not(.is-visible) { transition-duration:
 .certificate-frame { display:block; width:100%; aspect-ratio:1.38; border:0; background:#fff; }
 .certificate-open-link { display:flex; align-items:center; justify-content:space-between; gap:8px; padding:9px 3px 2px; color:#716a7b; font:9px var(--mono); text-decoration:none; }
 .certificate-open-link:hover { color:#7558c3; }
+.certificate-viewer { width:100%; aspect-ratio:1.38; overflow:hidden; display:grid; place-items:center; border:1px solid #e9e6ef; background:#f8f7fa; }
+.certificate-viewer .certificate-frame { display:block; width:100%; height:100%; aspect-ratio:auto; overflow:hidden; border:0; background:#fff; pointer-events:none; }
 @media(max-width:850px){.certificate-feed{grid-template-columns:repeat(2,minmax(0,1fr))}.certificate-post:last-child{grid-column:1/-1;max-width:calc(50% - 8px)}}
 @media(max-width:560px){.credentials-section{padding-top:54px;padding-bottom:48px}.credentials-heading{padding-left:61px}.certificate-orbit{width:43px;height:43px}.certificate-feed{grid-template-columns:1fr;gap:12px;margin-top:26px}.certificate-post:last-child{grid-column:auto;max-width:none}.certificate-post{padding:9px}.certificate-frame{aspect-ratio:1.55}}
 @keyframes buddy-plead { 0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-3px) rotate(2deg)} }

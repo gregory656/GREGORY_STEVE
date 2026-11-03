@@ -29,10 +29,9 @@ import "./App.css";
 const CURRENT_YEAR = new Date().getFullYear();
 const PROJECT_FILTERS = ["All", "Campus", "Education", "Business", "AI / LLM", "Systems / IoT"];
 const certificates = [
-  // Reuse this shape for new credentials: add one object and replace its title and links.
-  { title: "SQL Basic", url: "https://www.hackerrank.com/certificates/cceabf8651a9", embed: "https://www.hackerrank.com/certificates/iframe/cceabf8651a9" },
-  { title: "SQL Intermediate", url: "https://www.hackerrank.com/certificates/26e6e540649f", embed: "https://www.hackerrank.com/certificates/iframe/26e6e540649f" },
-  { title: "SQL Advanced", url: "https://www.hackerrank.com/certificates/9ceab2ee56f4", embed: "https://www.hackerrank.com/certificates/iframe/9ceab2ee56f4" },
+  { title: "SQL Basic", url: "https://www.hackerrank.com/certificates/cceabf8651a9", pdf: new URL("./assets/sql_basic certificate.pdf", import.meta.url).href },
+  { title: "SQL Intermediate", url: "https://www.hackerrank.com/certificates/26e6e540649f", pdf: new URL("./assets/sql_intermediate certificate.pdf", import.meta.url).href },
+  { title: "SQL Advanced", url: "https://www.hackerrank.com/certificates/9ceab2ee56f4", pdf: new URL("./assets/sql_advanced certificate.pdf", import.meta.url).href },
 ];
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
@@ -151,7 +150,7 @@ function usePath() {
   const go = (to: string) => {
     history.pushState({}, "", to);
     setPath(to);
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    window.scrollTo({ top: 0, behavior: "auto" });
   };
   return [path, go] as const;
 }
@@ -180,10 +179,10 @@ function Header({
       go("/");
       setTimeout(
         () =>
-          document.getElementById(id)?.scrollIntoView({ behavior: "smooth" }),
+          document.getElementById(id)?.scrollIntoView({ behavior: "auto" }),
         40,
       );
-    } else document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    } else document.getElementById(id)?.scrollIntoView({ behavior: "auto" });
   };
   return (
     <>
@@ -298,25 +297,8 @@ function BirdFlight() {
   </svg>;
 }
 function Hero() {
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
-  const pointer = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (
-      e.pointerType !== "mouse" ||
-      window.matchMedia?.("(prefers-reduced-motion: reduce)").matches
-    )
-      return;
-    const r = e.currentTarget.getBoundingClientRect();
-    setOffset({
-      x: ((e.clientX - r.left - r.width / 2) / r.width) * 8,
-      y: ((e.clientY - r.top - r.height / 2) / r.height) * 8,
-    });
-  };
   return (
-    <section
-      className="hero section-wrap"
-      onPointerMove={pointer}
-      onPointerLeave={() => setOffset({ x: 0, y: 0 })}
-    >
+    <section className="hero section-wrap">
       <div className="hero-copy">
         <Eyebrow>
           <Code2 className="availability-mark" size={13} strokeWidth={1.7} aria-hidden="true" /> Software engineer ·{" "}
@@ -330,12 +312,13 @@ function Hero() {
           <span>forward.</span>
         </h1>
         <p className="hero-lede">
-          From thoughtful interfaces to dependable systems, I turn complex ideas
-          into useful digital products.
+          I build web products for real workflows—from campus communities and
+          school operations to customer-facing business sites. Nairobi-based and
+          open to software engineering roles.
         </p>
         <div className="hero-actions">
           <a className="button button-dark" href="#work">
-            Explore my work <Arrow diagonal />
+            View selected work <Arrow diagonal />
           </a>
           <span className="cv-invite">
             <a className="text-link cv-download" href={profile.resume} download>
@@ -351,12 +334,7 @@ function Hero() {
         </div>
       </div>
       <div className="hero-visual">
-        <div
-          className="portrait-frame"
-          style={{
-            transform: "translate3d(" + offset.x + "px," + offset.y + "px,0)",
-          }}
-        >
+        <div className="portrait-frame">
           <img
             src="/images/steve.jpg"
             alt="Stephen Gregory Otieno"
@@ -630,11 +608,13 @@ function Credentials() {
         <span className="certificate-orbit" aria-hidden="true"><i /><i /><i /></span>
         <Eyebrow>Credentials</Eyebrow>
         <h2>Proof over <em>promises.</em></h2>
-        <p>SQL credentials, displayed directly from the issuing platform.</p>
+        <p>SQL certificates in a fixed, document-style preview. Open any certificate to verify it with HackerRank.</p>
         <a className="certificate-profile-link" href="https://www.hackerrank.com/profile/gregorysteve656" target="_blank" rel="noreferrer">HackerRank profile <Arrow diagonal /></a>
       </div>
       <div className="certificate-feed">{certificates.map((certificate) => <article className="certificate-post" key={certificate.title}>
-        <iframe className="certificate-frame" src={certificate.embed} title={`${certificate.title} certificate`} loading="lazy" referrerPolicy="strict-origin-when-cross-origin" />
+        <div className="certificate-viewer">
+          <iframe className="certificate-frame" src={`${certificate.pdf}#toolbar=0&navpanes=0&scrollbar=0&view=Fit`} title={`${certificate.title} certificate PDF preview`} loading="lazy" scrolling="no" tabIndex={-1} />
+        </div>
         <a className="certificate-open-link" href={certificate.url} target="_blank" rel="noreferrer" aria-label={`Open ${certificate.title} certificate`}>{certificate.title} <Arrow diagonal /></a>
       </article>)}</div>
     </section>
@@ -716,7 +696,7 @@ function Footer({ go }: { go: (to: string) => void }) {
         href="#top"
         onClick={(e) => {
           e.preventDefault();
-          scrollTo({ top: 0, behavior: "smooth" });
+          scrollTo({ top: 0, behavior: "auto" });
         }}
       >
         <BrandMark compact />
@@ -1055,7 +1035,7 @@ function CommandPalette({
                   () =>
                     document
                       .querySelector(hash)
-                      ?.scrollIntoView({ behavior: "smooth" }),
+                      ?.scrollIntoView({ behavior: "auto" }),
                   50,
                 );
               } else go(path);
@@ -1099,44 +1079,6 @@ export default function App() {
       "content",
       "Stephen Gregory Otieno is a Nairobi based software engineer building useful digital products and dependable systems.",
     );
-  }, [path]);
-  useEffect(() => {
-    const targets = document.querySelectorAll<HTMLElement>(
-      ".hero-copy, .hero-visual, .section-title, .project-row, .skill-group, .about-art, .about-copy > p, .journey-row, .credentials-section > *, .resume-section > *, .contact-title, .contact-details, .systems-lab, .field-ticker, .work-section, .toolkit-section, .about-section, .journey-section, .credentials-section, .contact-section, .signal-strip",
-    );
-    if (window.matchMedia?.("(prefers-reduced-motion: reduce)").matches || !("IntersectionObserver" in window)) {
-      targets.forEach((target) => target.classList.add("is-visible"));
-      return;
-    }
-    let previousY = window.scrollY;
-    let direction: "down" | "up" = "down";
-    const updateDirection = () => {
-      const nextY = window.scrollY;
-      if (nextY !== previousY) direction = nextY > previousY ? "down" : "up";
-      previousY = nextY;
-      document.documentElement.dataset.scrollDirection = direction;
-    };
-    window.addEventListener("scroll", updateDirection, { passive: true });
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.setAttribute("data-motion", direction === "down" ? "from-below" : "from-above");
-          entry.target.classList.add("is-visible");
-        } else {
-          entry.target.setAttribute("data-motion", direction === "down" ? "exit-up" : "exit-down");
-          entry.target.classList.remove("is-visible");
-        }
-      });
-    }, { threshold: 0.08, rootMargin: "0px 0px -10% 0px" });
-    targets.forEach((target) => {
-      target.classList.add("reveal");
-      observer.observe(target);
-    });
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("scroll", updateDirection);
-      delete document.documentElement.dataset.scrollDirection;
-    };
   }, [path]);
   const detail = path.startsWith("/projects/")
     ? projects.find((p) => path.split("/").pop() === p.slug)

@@ -20,7 +20,7 @@
   box-sizing: border-box;
 }
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
   scroll-padding-top: 96px;
   overflow-x: clip;
 }
@@ -74,4 +74,31 @@ img {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+/* The portfolio is intentionally still: keep every section visible immediately. */
+*,
+*::before,
+*::after {
+  animation: none !important;
+  transition: none !important;
+  scroll-behavior: auto !important;
+}
+
+.reveal,
+.reveal:not(.is-visible),
+.reveal.is-visible {
+  opacity: 1 !important;
+  filter: none !important;
+  transform: none !important;
+  will-change: auto !important;
+}
+
+.ticker-track {
+  animation: none !important;
+  transform: none !important;
+}
+
+.ticker-set:nth-child(2) {
+  display: none;
 }
