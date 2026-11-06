@@ -76,15 +76,6 @@ img {
   }
 }
 
-/* The portfolio is intentionally still: keep every section visible immediately. */
-*,
-*::before,
-*::after {
-  animation: none !important;
-  transition: none !important;
-  scroll-behavior: auto !important;
-}
-
 .reveal,
 .reveal:not(.is-visible),
 .reveal.is-visible {
@@ -94,11 +85,3 @@ img {
   will-change: auto !important;
 }
 
-.ticker-track {
-  animation: none !important;
-  transform: none !important;
-}
-
-.ticker-set:nth-child(2) {
-  display: none;
-}

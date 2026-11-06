@@ -43,6 +43,11 @@ export type Project = {
   imageAlt: string;
   github: string;
   downloadUrl?: string;
+  introVideo?: { src: string; poster: string; label: string };
+  supportingMedia?: { image: string; imageAlt: string; document: string };
+  mediaGallery?: { src: string; alt: string; label: string; caption: string }[];
+  mediaGalleryLabel?: string;
+  imageCredit?: { name: string; source: string; href: string };
   concept?: boolean;
 };
 
@@ -72,9 +77,22 @@ export const projects: Project[] = [
       "A compelling community product depends on trust, clear moderation paths, and a marketplace that never overwhelms the social experience.",
     url: "https://siviq.top",
     downloadUrl: "https://play.google.com/store/apps/details?id=com.siviq.africa",
-    image: "/images/project-siviq.svg",
-    imageAlt:
-      "Editorial illustration of a campus community and marketplace interface",
+    image: "/projects/siviq/siviq-chats.png",
+    imageAlt: "Siviq mobile app chats tab showing campus and group conversations",
+    mediaGallery: [
+      {
+        src: "/projects/siviq/siviq-chats.png",
+        alt: "Siviq mobile app chats tab with saved messages, campus groups, unread counts, and direct conversations",
+        label: "01 / CAMPUS CONVERSATIONS",
+        caption: "Chats bring direct messages, groups, saved notes, and unread activity together.",
+      },
+      {
+        src: "/projects/siviq/siviq-projects.png",
+        alt: "Siviq Projects mobile screen showing project updates, status, and community engagement",
+        label: "02 / PROJECT COMMUNITY",
+        caption: "Projects give campus teams a shared place to post updates and follow progress.",
+      },
+    ],
     github: "https://github.com/gregory656",
   },
   {
@@ -101,8 +119,23 @@ export const projects: Project[] = [
     lessons:
       "Good school software respects the rhythm of the school day: fast access to the right information, clear permissions, and resilient records.",
     url: "https://nexagen.co.ke",
-    image: "/images/project-nexagen.svg",
-    imageAlt: "Editorial illustration of a school management dashboard",
+    image: "/projects/nexagen/nexagen-identity.png",
+    imageAlt: "NexaGen identity artwork for its education technology project",
+    mediaGalleryLabel: "NEXAGEN / IDENTITY & PARTNERSHIP",
+    mediaGallery: [
+      {
+        src: "/projects/nexagen/nexagen-identity.png",
+        alt: "NexaGen EdTech identity artwork with the phrase Building What's Next",
+        label: "01 / NEXAGEN EDTECH",
+        caption: "The NexaGen identity and the education technology work behind the project.",
+      },
+      {
+        src: "/projects/nexagen/school-partnership.png",
+        alt: "NexaGen EdTech and Friends School Kivaywa partnership artwork",
+        label: "02 / SCHOOL PARTNERSHIP",
+        caption: "A partnership spotlight showing NexaGen EdTech alongside Friends School Kivaywa.",
+      },
+    ],
     github: "https://github.com/gregory656",
   },
   {
@@ -129,9 +162,18 @@ export const projects: Project[] = [
     lessons:
       "Service pages work best when the next useful action is obvious and content remains easy to scan on a phone.",
     url: "https://topheightselectricals.com",
-    image: "/images/project-top-heights.svg",
-    imageAlt:
-      "Editorial illustration of a solar and electrical services website",
+    image: "/projects/top-heights/top-heights-logo.png",
+    imageAlt: "Top Heights Electricals logo",
+    introVideo: {
+      src: "/projects/top-heights/brand-intro.mp4",
+      poster: "/projects/top-heights/top-heights-logo.png",
+      label: "Top Heights Electricals logo introduction",
+    },
+    supportingMedia: {
+      image: "/projects/top-heights/top-heights-logo.png",
+      imageAlt: "Transparent Top Heights Electricals logo artwork",
+      document: "/projects/top-heights/top-heights-brand-sheet.pdf",
+    },
     github: "https://github.com/gregory656",
   },
   {
@@ -149,8 +191,9 @@ export const projects: Project[] = [
     lessons: "This is a speculative architecture and product-design exercise, not a deployed service or measured result. The most interesting challenge is making evidence quality visible to the person using the system.",
     url: "https://github.com/gregory656",
     github: "https://github.com/gregory656",
-    image: "/images/project-neural-atlas.svg",
-    imageAlt: "Abstract editorial illustration of a grounded AI research system",
+    image: "/images/stock-neural-atlas.jpg",
+    imageAlt: "Research books, notes, and a study desk representing careful evidence-led research",
+    imageCredit: { name: "Yen Vu", source: "Unsplash", href: "https://unsplash.com/photos/desk-with-open-book-laptop-and-study-materials-HNjWq8WPyoY" },
     concept: true,
   },
   {
@@ -168,8 +211,9 @@ export const projects: Project[] = [
     lessons: "This is a proposed system design, not a deployed sensor network. It reflects a future learning direction in embedded systems and IoT, where hardware constraints meet distributed-software fundamentals.",
     url: "https://github.com/gregory656",
     github: "https://github.com/gregory656",
-    image: "/images/project-field-echo.svg",
-    imageAlt: "Abstract editorial illustration of connected environmental sensors",
+    image: "/images/stock-field-echo.jpg",
+    imageAlt: "Weather radar station in an open field beneath a bright sky",
+    imageCredit: { name: "Charles Criscuolo", source: "Pexels", href: "https://www.pexels.com/photo/weather-radar-station-in-field-under-clear-sky-29436201/" },
     concept: true,
   },
 ];
@@ -312,6 +356,6 @@ export const experience = [
     role: "Lead Developer TopHeights ",
     organization: "Top Heights Electricals",
     detail:
-      "mobile appp development, customer facing service information, responsive presentation, usability, and troubleshooting.",
+      "Mobile app development, customer-facing service information, responsive presentation, usability, and troubleshooting.",
   },
 ] as const;

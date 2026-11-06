@@ -21,7 +21,6 @@ import {
   Cpu,
   Mail,
   Phone,
-  Play,
   Search,
 } from "lucide-react";
 import "./App.css";
@@ -29,9 +28,9 @@ import "./App.css";
 const CURRENT_YEAR = new Date().getFullYear();
 const PROJECT_FILTERS = ["All", "Campus", "Education", "Business", "AI / LLM", "Systems / IoT"];
 const certificates = [
-  { title: "SQL Basic", url: "https://www.hackerrank.com/certificates/cceabf8651a9", pdf: new URL("./assets/sql_basic certificate.pdf", import.meta.url).href },
-  { title: "SQL Intermediate", url: "https://www.hackerrank.com/certificates/26e6e540649f", pdf: new URL("./assets/sql_intermediate certificate.pdf", import.meta.url).href },
-  { title: "SQL Advanced", url: "https://www.hackerrank.com/certificates/9ceab2ee56f4", pdf: new URL("./assets/sql_advanced certificate.pdf", import.meta.url).href },
+  { title: "SQL Basic", url: "https://www.hackerrank.com/certificates/cceabf8651a9", pdf: "/documents/sql-basic-certificate.pdf" },
+  { title: "SQL Intermediate", url: "https://www.hackerrank.com/certificates/26e6e540649f", pdf: "/documents/sql-intermediate-certificate.pdf" },
+  { title: "SQL Advanced", url: "https://www.hackerrank.com/certificates/9ceab2ee56f4", pdf: "/documents/sql-advanced-certificate.pdf" },
 ];
 
 function Arrow({ diagonal = false }: { diagonal?: boolean }) {
@@ -264,18 +263,8 @@ function Botanical({ className = "" }: { className?: string }) {
     </svg>
   );
 }
-function EngineeringScene() {
-  return <svg className="engineering-scene" viewBox="0 0 420 420" fill="none" aria-hidden="true">
-    <defs><radialGradient id="human-glow"><stop stopColor="#fff"/><stop offset=".48" stopColor="#d9cbff" stopOpacity=".5"/><stop offset="1" stopColor="#fff" stopOpacity="0"/></radialGradient></defs>
-    <circle className="human-halo" cx="210" cy="205" r="116" fill="url(#human-glow)"/>
-    <circle className="human-orbit orbit-one" cx="210" cy="205" r="147" stroke="#d8cef5" strokeDasharray="3 8"/>
-    <ellipse className="human-orbit orbit-two" cx="210" cy="205" rx="175" ry="90" stroke="#d7eff1" transform="rotate(-34 210 205)"/>
-    <path className="circuit-route route-one" d="M31 92h65l25 25h44m224 194h-73l-29-29h-41M82 340h45l31-31h35m140-238h-43l-25 25h-30" stroke="#b8a5ed"/>
-    <path className="circuit-route route-two" d="M49 222h76l20-20h38m188-84h-58l-25 26h-45m-213 101h54l30 29h44m204-18h-51l-28 29h-37" stroke="#a7dbe2"/>
-    <g className="human-figure"><circle cx="210" cy="164" r="30" fill="#fff" stroke="#22202b" strokeWidth="2"/><path d="M154 282c4-43 26-66 56-66s52 23 56 66" fill="#fff" stroke="#22202b" strokeWidth="2"/><path d="M173 238c13 13 26 19 37 19s24-6 37-19" stroke="#b5a1ed" strokeWidth="3" strokeLinecap="round"/></g>
-    <g className="human-nodes"><rect x="92" y="113" width="8" height="8" rx="1" fill="#f3a17f"/><rect x="341" y="139" width="6" height="6" rx="1" fill="#8dcad3"/><rect x="125" y="305" width="8" height="8" rx="1" fill="#8dcad3"/><rect x="326" y="288" width="8" height="8" rx="1" fill="#b99df1"/><rect x="61" y="220" width="4" height="4" rx="1" fill="#f3a17f"/></g>
-    <text x="210" y="365" textAnchor="middle" fill="#85808d" fontFamily="monospace" fontSize="9" letterSpacing="3">PEOPLE AT THE CENTER / SYSTEMS AROUND</text>
-  </svg>;
+function FounderPortrait() {
+  return <img className="about-founder-photo" src="/images/steve_selfie.png" alt="Stephen Gregory Otieno outdoors in Nairobi" loading="lazy" />;
 }
 function FieldTicker({ top = false }: { top?: boolean }) {
   const notes = top
@@ -375,7 +364,7 @@ function ProjectRow({
   return (
     <article className={"project-row project-row-" + index}>
       <button
-        className="project-image"
+        className={`project-image project-image-${project.slug}`}
         onClick={() => go("/projects/" + project.slug)}
         aria-label={"Read " + project.title + " case study"}
       >
@@ -410,7 +399,7 @@ function ProjectRow({
             Read the case study <Arrow diagonal />
           </button>
           <a className="project-repo-link" href={project.github} target="_blank" rel="noreferrer"><BrandGlyph name="GitHub" /> GitHub profile <Arrow diagonal /></a>
-          {project.downloadUrl && <a className="project-download-link" href={project.downloadUrl} target="_blank" rel="noreferrer"><Play className="play-mark" size={13} fill="currentColor" aria-hidden="true" /> Get Siviq on Google Play <Arrow diagonal /></a>}
+          {project.downloadUrl && <a className="project-download-link" href={project.downloadUrl} target="_blank" rel="noreferrer" aria-label="Get Siviq on Google Play"><span>AVAILABLE ON ANDROID</span><img className="google-play-badge" src="/images/google-play-badge.png" alt="Get it on Google Play" /></a>}
         </div>
       </div>
     </article>
@@ -494,11 +483,8 @@ A product mindset."
             <span className="platform-copy"><strong>{item.name}</strong><small>{item.detail}</small></span><Arrow diagonal />
           </a>)}
         </div>
-        <p className="profile-note">DeepLearning.View course library</p>
+        <p className="profile-note">Links to public practice, coursework, and learning profiles.</p>
       </div>
-      <p className="toolkit-note">
-      DeepLearning.View course library
-      </p>
     </section>
   );
 }
@@ -528,7 +514,7 @@ function About({ go }: { go: (to: string) => void }) {
   return (
     <section id="about" className="about-section section-wrap">
       <div className="about-art">
-        <EngineeringScene />
+        <FounderPortrait />
         <div className="art-caption">
           A SYSTEM IS ONLY AS GOOD
           <br />
@@ -556,6 +542,15 @@ people in mind."
           See how I work <Arrow diagonal />
         </button>
       </div>
+      <section className="brand-spotlight" aria-labelledby="brand-spotlight-title">
+        <div className="brand-story">
+          <Eyebrow>MY TECH BRAND / BUILT WITH INTENTION</Eyebrow>
+          <h3 id="brand-spotlight-title">Meet me through <em>Nia Digital.</em></h3>
+          <p>Nia Digital is my technology brand: a space for software, digital products, and ideas built around people.</p>
+          <span className="brand-story-mark"><i /> INDEPENDENT / NAIROBI, KE</span>
+        </div>
+        <figure className="brand-identity-art"><span className="brand-art-index">02 / IDENTITY</span><img src="/images/nia_digital.png" alt="Nia Digital, a technology brand built around you" loading="lazy" /><figcaption>NIA DIGITAL <i>TECH BRAND</i></figcaption></figure>
+      </section>
     </section>
   );
 }
@@ -591,12 +586,31 @@ function Journey() {
                 <h3>{e.role}</h3>
                 <p>{e.organization}</p>
                 <p className="journey-detail">{e.detail}</p>
+                <a className="employment-verification" href="tel:+254711343412" aria-label="Call Top Heights Electricals for employment verification at plus 254 711 343 412"><span>COMPANY / WORK VERIFICATION</span><strong>+254 711 343 412</strong><small>Public Top Heights business line <Arrow diagonal /></small></a>
+                <a className="verification-source" href="https://www.topheightselectricals.com/" target="_blank" rel="noreferrer">Company contact page <Arrow diagonal /></a>
               </div>
               <span className="journey-date">Professional</span>
             </article>
           ))}
         </div>
       </div>
+      <section className="campus-feature" aria-labelledby="campus-feature-title">
+        <div className="campus-feature-copy">
+          <span className="campus-coordinate">KYU / STUDY NOTES / 01—04</span>
+          <Eyebrow>STUDYING HERE / KIRINYAGA COUNTY, KENYA</Eyebrow>
+          <h3 id="campus-feature-title">Kirinyaga is part of <em>my story.</em></h3>
+          <p>A look at the campus behind my Bachelor of Science in Software Engineering: a place of study, ideas, and the work still ahead.</p>
+          <div className="campus-study-marker"><span>MY COURSE</span><strong>BSc Software Engineering</strong><i aria-hidden="true">↗</i></div>
+          <span className="campus-photo-credit">CAMPUS PHOTO DIARY <b>01 — 04</b></span>
+        </div>
+        <div className="campus-photo-grid">
+          <figure className="campus-photo campus-photo-main"><img src="/images/kirinyaga/campus-01.png" alt="Academic building and grounds at Kirinyaga University" loading="lazy" /><figcaption><span>01</span> THE LEARNING GROUND</figcaption></figure>
+          <figure className="campus-photo campus-photo-drive"><img src="/images/kirinyaga/campus-02.png" alt="Tree-lined brick campus drive at Kirinyaga University" loading="lazy" /><figcaption><span>02</span> CAMPUS WAY</figcaption></figure>
+          <figure className="campus-photo campus-photo-building"><img src="/images/kirinyaga/campus-03.png" alt="Campus building framed by trees at Kirinyaga University" loading="lazy" /><figcaption><span>03</span> BETWEEN IDEAS</figcaption></figure>
+          <figure className="campus-photo campus-photo-night"><img src="/images/kirinyaga/campus-04.png" alt="Illuminated campus path at Kirinyaga University after dark" loading="lazy" /><figcaption><span>04</span> AFTER HOURS</figcaption></figure>
+          <div className="campus-grid-stamp" aria-hidden="true">KYU<br /><span>KENYA</span></div>
+        </div>
+      </section>
       <div className="future-path"><span>FUTURE DIRECTION / LEARNING PATH</span><strong>{futureDirection}</strong><p>Long-term curiosity: intelligent devices, robust edge systems, and the software that connects them.</p><i aria-hidden="true">↗</i></div>
     </section>
   );
@@ -841,7 +855,7 @@ function ProjectIndex({
         </div>
       )}
       <p className="artwork-note">
-        Concept imagery is original editorial artwork, not a screenshot of a live product.
+        Project galleries combine supplied product images with clearly credited stock photography for concept work.
       </p>
     </main>
   );
@@ -879,10 +893,30 @@ function CaseStudy({
               {project.concept ? <><BrandGlyph name="GitHub" /> GitHub profile</> : <>Visit project <Arrow diagonal /></>}
             </a>
           </span>
-          {project.downloadUrl && <span className="case-store-meta"><small>ANDROID APP</small><a href={project.downloadUrl} target="_blank" rel="noreferrer"><Play className="play-mark" size={13} fill="currentColor" aria-hidden="true" /> Download on Google Play <Arrow diagonal /></a></span>}
+          {project.downloadUrl && <span className="case-store-meta"><small>ANDROID APP</small><a href={project.downloadUrl} target="_blank" rel="noreferrer" aria-label="Get Siviq on Google Play"><img className="google-play-badge" src="/images/google-play-badge.png" alt="Get it on Google Play" /></a></span>}
         </div>
       </div>
-      <img className="case-cover" src={project.image} alt={project.imageAlt} />
+      {project.mediaGallery ? <section className={`case-media-showcase project-media-showcase-${project.slug}`} aria-label={`${project.title} project images`}>
+        <div className="case-media-kicker"><span>PROJECT / IN FOCUS</span><span>{project.mediaGalleryLabel ?? "REAL PRODUCT SCREENS"}</span></div>
+        <div className="siviq-screen-grid">{project.mediaGallery.map((media) => <figure className="siviq-screen-card" key={media.src}>
+          <div className="siviq-screen-image"><img src={media.src} alt={media.alt} loading="lazy" /></div>
+          <figcaption><span>{media.label}</span><p>{media.caption}</p></figcaption>
+        </figure>)}</div>
+      </section> : project.introVideo ? <section className="case-media-showcase" aria-label="Project media">
+        <div className="case-video-panel">
+          <div className="case-media-kicker"><span>01 / INTRODUCTION</span><span>ORIGINAL PROJECT MEDIA</span></div>
+          <video className="case-intro-video" controls playsInline preload="metadata" poster={project.introVideo.poster} aria-label={project.introVideo.label}>
+            <source src={project.introVideo.src} type="video/mp4" />
+            Your browser does not support embedded video. <a href={project.introVideo.src}>Open the introduction video</a>.
+          </video>
+          <p>{project.introVideo.label}</p>
+        </div>
+        {project.supportingMedia && <div className="case-supporting-media">
+          <div className="case-brand-art"><span>02 / BRAND ARTWORK</span><img src={project.supportingMedia.image} alt={project.supportingMedia.imageAlt} /></div>
+          <div className="case-document-card"><span className="document-stamp">PDF / 03</span><div><Eyebrow>Supporting document</Eyebrow><h2>Brand mark, in its original format.</h2><p>The supplied Top Heights logo sheet, preserved as a downloadable PDF.</p></div><a className="button button-dark" href={project.supportingMedia.document} target="_blank" rel="noreferrer">Open brand PDF <Arrow diagonal /></a></div>
+        </div>}
+      </section> : <img className="case-cover" src={project.image} alt={project.imageAlt} />}
+      {project.imageCredit && <p className="stock-credit">Stock photo by <a href={project.imageCredit.href} target="_blank" rel="noreferrer">{project.imageCredit.name} · {project.imageCredit.source}</a></p>}
       <p className="artwork-note">
         Editorial concept artwork · Not a screenshot of the live product.
       </p>
